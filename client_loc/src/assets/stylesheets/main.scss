@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+    border: none;
+    margin: 0;
+  }
+
+  @mixin disp($he: 100%, $wid: 100%, $disp: flex, $dir: row, $ai: 0, $jc: 0) {
+    display: $disp;
+    height: $he;
+    width: $wid;
+    flex-direction: $dir;
+    align-items: $ai;
+    justify-content: $jc;
+}
+
+#signup_main_cont {
+    @include disp($he: 100vh, $wid: 100vw);
+    background-color: red;
+
+    #signup_first_sec {
+        @include disp($he: 100%, $wid: 45%, $dir: column, $ai: center, $jc: center);
+        background-color: black;
+ 
+        form{
+            @include disp($dir: column, $wid: 90%, $he: 70%, $ai: center, $jc: center);
+            border: 1px solid green;
+            gap: 2%;
+
+            div {
+                width: 85%;
+                height: 10%;     
+                
+                input {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+
+        }
+    }
+
+}
