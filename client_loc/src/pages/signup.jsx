@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 
 import '../assets/stylesheets/main.css'
 
+import SaveToLocal from '../utils/userUtils.js'
+
 const Signup = () =>{
 
   // Variables
@@ -30,7 +32,9 @@ const Signup = () =>{
     function handleBtn(e) {
       e.preventDefault()
       let dataS = signUpData
-      console.log(dataS) 
+      console.log(dataS)
+
+      SaveToLocal(dataS)
     }
 
 
@@ -39,8 +43,6 @@ const Signup = () =>{
     <main id="signup_main_cont">
 
         <section id="signup_first_sec">
-
-          <h1>jsijsji</h1>
 
           <form>
             <h2>Login</h2>

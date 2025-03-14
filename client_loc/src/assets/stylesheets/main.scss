@@ -40,3 +40,48 @@
     }
 
 }
+
+#topBar {
+    @include disp($he: 6vh, $wid: 100vw,);
+    background-color: green;
+}
+
+#home_main_cont {
+    @include disp($he: 94vh, $wid: 100vw, $dir: row);
+    background-color: red;
+
+    #home_first_sec{
+        @include disp($he: 100%, $wid: 35%, $dir: column);
+        background-color: rgb(131, 121, 121);
+
+        #sec1_div1{
+            @include disp($he: 6%, $wid: 100%, $jc: center);
+            margin-top: 1%;
+            gap: 2%;
+
+            button {
+                width: 30%;
+                height: 80%;
+            }
+
+            input {
+                border-radius: 2%;
+                width: 65%;
+                height: 80%;
+            }
+        }
+    }
+
+    #home_second_sec{
+        @include disp($wid: 65%, $jc: center);
+        background-color: rgb(231, 231, 215);
+
+        #map_div {
+            border: 1px solid green;
+            height: 90%;
+            width: 98%;
+            border-radius: 2%;
+            margin-top: 1%;
+        }
+    }
+}
