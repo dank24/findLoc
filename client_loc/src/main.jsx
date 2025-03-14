@@ -4,7 +4,5 @@ import App from './App.jsx'
 import Signup from './pages/signup.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
     <App />
-  </StrictMode>,
 )
