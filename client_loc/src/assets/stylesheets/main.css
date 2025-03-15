@@ -79,14 +79,9 @@
   margin-top: 1%;
   gap: 2%;
 }
-#home_main_cont #home_first_sec #sec1_div1 button {
-  width: 30%;
-  height: 80%;
-}
-#home_main_cont #home_first_sec #sec1_div1 input {
-  border-radius: 2%;
-  width: 65%;
-  height: 80%;
+#home_main_cont #home_first_sec #sec1_div2 {
+  height: 90%;
+  border: 5px solid rgb(240, 247, 240);
 }
 #home_main_cont #home_second_sec {
   display: flex;

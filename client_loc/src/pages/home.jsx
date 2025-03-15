@@ -2,6 +2,9 @@ import React, { useState } from "react";
 
 import '../assets/stylesheets/main.css'
 import MapComp from "../components/map";
+import LocationCard from "../components/locationCard";
+import locations from '../assets/locs'
+
 
 const Home = () => {
 
@@ -13,6 +16,19 @@ const Home = () => {
   })
 
     //  Functions
+
+    // Appends
+    const sideBarLocations = locations.map(its => {
+      return (
+        < LocationCard 
+          name = {its.name}
+          key = {its.name}
+          lenght = '10%'
+          lat =  {its.lat}
+          lng =  {its.lng}
+        />
+      )
+    })
 
 
     // UI
@@ -28,12 +44,11 @@ const Home = () => {
           <section id="home_first_sec">
 
               <div id="sec1_div1">
-                <input id="searchInp" placeholder="enter Location"/>
-                <button>Search</button> 
+                <h1>Recent</h1>
               </div>
 
-              <div id="1sec_2div">
-                <h1>Recent</h1>
+              <div id="sec1_div2">
+                {sideBarLocations}
               </div>
 
               <div id="1sec_div2">

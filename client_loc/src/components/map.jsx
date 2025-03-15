@@ -1,41 +1,41 @@
 import React, { useEffect, useState, useRef } from "react";
 
-const MapComp = () => {
+const MapComp = (props) => {
   //  Variables
     const api_key =  'AIzaSyCjWzAIoSJYb38wnavpQ6Wh4yER15NMcko'
-    let MapEle = document.querySelector('#map_div')
+    let mapRef = useRef(null)
 
   //  Functions
-    // Initial map function
-     async function initMap(){
 
-        //6.131973147874651, 8.141276842329257
+    //  Maping function
+    const initMap2 = async (lat, lng, title) =>{
 
-        let position = {lat: 6.131973147874651, lng: 8.141276842329257}
-        let {Map} = await google.maps.importLibrary("maps")
+        let position = {lat: lat, lng: lng,}
+        let {Map} = await google.maps.importLibrary('maps')
         let {AdvancedMarkerElement} = await google.maps.importLibrary('marker')
 
-        let attMap = new Map(MapEle, {
+        let attMap = new Map(mapRef.current, {
             center: position,
-            zoom: 20,
+            zoom: 15,
             mapId: 'DEMO_MAP_ID'
         })
-
         let attMarker = new AdvancedMarkerElement({
             map: attMap,
             position: position,
-            title: 'Uluru'
+            title: title
         })
-     }
+    }
     
+    // Stles
     const style = {
         width: '100%',
         height: '100%',
         backgroundColor:'red'
     }
 
+  // UseEffects
  useEffect(() =>{
-    initMap()
+    initMap2(6.131973147874651, 8.141276842329257, "Funia")
  }, [])
 
 
@@ -43,7 +43,7 @@ const MapComp = () => {
     return(
         <main id="map_cont" style={style}>
 
-            <div id="map_div"> </div>
+            <div style={style} ref={mapRef} > </div>
 
         </main>
     )
