@@ -2,6 +2,11 @@ import React, { useEffect, useState, useRef } from "react";
 
 const MapComp = (props) => {
   //  Variables
+    const [mapLocData, setMapLocData] = useState({
+        lat: '',
+        lng: '',
+        name: '',
+    })
     const api_key =  'AIzaSyCjWzAIoSJYb38wnavpQ6Wh4yER15NMcko'
     let mapRef = useRef(null)
 

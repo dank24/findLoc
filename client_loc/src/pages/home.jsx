@@ -15,7 +15,18 @@ const Home = () => {
       userSearch: [],
   })
 
+  const [locationData, setLocationData] = useState({
+    lat: '',
+    lng: '',
+    name: '',
+  })
+
     //  Functions
+    function getLocationData(n, l , ln) {
+      let dets = {name: n, lat: l, lng: ln}
+      setLocationData(dets)
+    }
+    console.log(locationData)
 
     // Appends
     const sideBarLocations = locations.map(its => {
@@ -26,6 +37,7 @@ const Home = () => {
           lenght = '10%'
           lat =  {its.lat}
           lng =  {its.lng}
+          handleClick = {getLocationData}
         />
       )
     })
