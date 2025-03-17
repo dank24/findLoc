@@ -45,10 +45,34 @@
   display: flex;
   height: 6vh;
   width: 100vw;
-  flex-direction: row;
+  flex-direction: row-reverse;
   align-items: 0;
   justify-content: 0;
   background-color: green;
+}
+#topBar div {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: 0;
+  height: 100%;
+  width: 30%;
+  background-color: "blue";
+  gap: 3%;
+  margin-right: 2%;
+}
+#topBar div #image_div {
+  height: 100%;
+  width: 20%;
+  background-color: rgb(110, 110, 216);
+  display: flex;
+  justify-content: center;
+}
+
+.loc_card_cont:hover {
+  border: 2px solid green;
 }
 
 #home_main_cont {
@@ -58,7 +82,6 @@
   flex-direction: row;
   align-items: 0;
   justify-content: 0;
-  background-color: red;
 }
 #home_main_cont #home_first_sec {
   display: flex;

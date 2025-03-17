@@ -4,6 +4,12 @@
     margin: 0;
   }
 
+  @mixin het($he: 0px, $wid: 0px, $bgc: 'blue'){
+    height: $he;
+    width: $wid;
+    background-color: $bgc;
+  }
+
   @mixin disp($he: 100%, $wid: 100%, $disp: flex, $dir: row, $ai: 0, $jc: 0) {
     display: $disp;
     height: $he;
@@ -42,13 +48,31 @@
 }
 
 #topBar {
-    @include disp($he: 6vh, $wid: 100vw,);
+    @include disp($he: 6vh, $wid: 100vw, $dir: row-reverse);
     background-color: green;
+
+    div{
+        @include disp($dir: row-reverse, $ai: center);
+        @include het($wid: 30%, $he: 100%);
+        gap: 3%;
+        margin-right: 2%;
+
+        #image_div{
+            @include het($he: 100%, $wid: 20%, $bgc: rgb(110, 110, 216) );
+            display: flex;
+            justify-content: center;
+        }
+
+
+    }
+}
+
+.loc_card_cont:hover {
+    border: 2px solid green;
 }
 
 #home_main_cont {
     @include disp($he: 94vh, $wid: 100vw, $dir: row);
-    background-color: red;
 
     #home_first_sec{
         @include disp($he: 100%, $wid: 35%, $dir: column);

@@ -16,6 +16,9 @@ const LocationCard = (props) =>{
 
 
   // Functions
+  const handleMouseOver = (e) => {
+    console.log(e.target.childNodes)
+  }
 
   // Styles
   let style = {
@@ -53,7 +56,7 @@ const LocationCard = (props) =>{
   // UI
   return (
 
-    <main style={style.main}>
+    <main className="loc_card_cont" style={style.main}>
         {appendLoc}
     </main>
 

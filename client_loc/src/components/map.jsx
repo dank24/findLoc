@@ -1,12 +1,15 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, memo} from "react";
+import { useLocation } from "react-router-dom";
+
 
 const MapComp = (props) => {
   //  Variables
-    const [mapLocData, setMapLocData] = useState({
-        lat: '',
-        lng: '',
-        name: '',
-    })
+    const mapLocData = {
+        lat: Number(props.lat),
+        lng: Number(props.lng),
+        name: props.name,
+    }
+
     const api_key =  'AIzaSyCjWzAIoSJYb38wnavpQ6Wh4yER15NMcko'
     let mapRef = useRef(null)
 
@@ -35,13 +38,15 @@ const MapComp = (props) => {
     const style = {
         width: '100%',
         height: '100%',
-        backgroundColor:'red'
     }
+
+    console.log(mapLocData)
 
   // UseEffects
  useEffect(() =>{
-    initMap2(6.131973147874651, 8.141276842329257, "Funia")
- }, [])
+    //initMap2(6.131973147874651, 8.141276842329257, "Funia")
+    initMap2(mapLocData.lat, mapLocData.lng, mapLocData.name)
+ }, [mapLocData])
 
 
     // UI
@@ -54,4 +59,4 @@ const MapComp = (props) => {
     )
 }
 
-export default MapComp
+export default memo(MapComp)
