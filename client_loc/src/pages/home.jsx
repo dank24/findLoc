@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import '../assets/stylesheets/main.css'
 import MapComp from "../components/map";
 import LocationCard from "../components/locationCard";
+import DropDownCard from "../components/dropDownLoc";
 import locations from '../assets/locs'
 import searchIcon from '../assets/images/icons/searchIcon.png'
+import targetIcon from '../assets/images/icons/targetIcon.png'
+import mapIcon from '../assets/images/icons/mapIconDef.png'
 import Search from "../components/search";
 
 
@@ -12,6 +15,7 @@ const Home = () => {
 
     //  Variables
   const [userData, setUserData] =useState({
+      userLocation: {},
       userfaves: [],
       userHistory: [],
       userSearch: [],
@@ -26,62 +30,104 @@ const Home = () => {
  
   const [uiDisplay, setUiDisplay] = useState({
     searchBar: false,
+    locations: false
   })
 
 
-    //  Functions
-      // get location data function
+  //  Functions
+    // get location data function
     function getLocationData(n, l , ln) {
       let dets = {name: n, lat: l, lng: ln}
       setLocationData(dets)
     }
 
-      // onClick event functions
+    // onClick event functions
     const onClickEvents = {
       search: () => {
-        console.log('clik')
-         setUiDisplay(prev => {
-          return {...prev, searchBar: !uiDisplay.searchBar}
-        }) 
+          console.log('clik')
+          setUiDisplay(prev => (
+          {...prev, searchBar: !uiDisplay.searchBar}
+          )) 
+      },
+      target: () => {
+          console.log('clicked image')
+          setLocationData(userData.userLocation)
+      },
+      location: () =>{
+          setUiDisplay(prev => (
+            {...prev, locations: !uiDisplay.locations}
+          ))
       }
     }
-    console.log(uiDisplay)
 
-    // Appends
-    const sideBarLocations = locations.map(its => {
-      return (
-        < LocationCard 
-          name = {its.name}
-          key = {its.name}
-          lenght = '10%'
-          lat =  {its.lat}
-          lng =  {its.lng}
-          handleClick = {getLocationData}
-        />
-     ) })
-  
+    // get user location 
+    const getUserLocation = () => {
+      navigator.geolocation.getCurrentPosition(pos =>{
+        let lat = pos.coords.latitude
+        let lng = pos.coords.longitude
+        
+        let obj = {lat, lng}
+        setUserData(prev => (
+          {...prev, userLocation: obj}
+        ))
+      })
+    }
+
+
+  console.log(userData)
+
+  // Appends
+  const sideBarLocations = locations.map(its => {
+    return (
+      < LocationCard 
+        name = {its.name}
+        key = {its.name}
+        lenght = '10%'
+        lat =  {its.lat}
+        lng =  {its.lng}
+        handleClick = {getLocationData}
+      />
+    ) })
+  //
       
+  // UseEffects
+    useEffect(() =>{
+      getUserLocation()
+    }, [])
+    
 
-    // UI
+  // UI
     return (
   <>
 
       <div id="topBar">
         <div>
+          
           <div onClick={onClickEvents.search} id="image_div">
-            <img width='30px' height='30px' src={searchIcon} />
-         
+            <img width='30px' height='30px' src={searchIcon} />  
           </div>
-          <h1>=</h1>
+
+          <div onClick={onClickEvents.location} style={{height: '100%', width: '20%', backgroundColor: 'grey'}}>
+            <img disable={true} src={mapIcon} width='95%' height='80%' />
+          </div>
+          
         </div>
+
       </div>
 
-      <main id="home_main_cont">
+      <main style={{}} id="home_main_cont">
 
-          {
+            {
               uiDisplay.searchBar &&
               < Search />
             }
+
+            {
+              uiDisplay.locations &&
+              < DropDownCard />
+            }
+
+
 
           <section id="home_first_sec">
 
@@ -102,7 +148,7 @@ const Home = () => {
           <section id="home_second_sec">
       
               <div id="map_div">
-                
+                <img onClick={onClickEvents.target} width='5%' src={targetIcon} id="target_icon"/> 
                 < MapComp 
                     lat = {locationData.lat}
                     lng = {locationData.lng}

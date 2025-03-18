@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef, memo} from "react";
 import { useLocation } from "react-router-dom";
 
+import { direction, } from "../utils/mapUtils";
 
 const MapComp = (props) => {
   //  Variables
@@ -9,6 +10,8 @@ const MapComp = (props) => {
         lng: Number(props.lng),
         name: props.name,
     }
+
+    const [userCoorinates, setUsercCoordinates] = useState({})
 
     const api_key =  'AIzaSyCjWzAIoSJYb38wnavpQ6Wh4yER15NMcko'
     let mapRef = useRef(null)
@@ -32,6 +35,7 @@ const MapComp = (props) => {
             position: position,
             title: title
         })
+
     }
     
     // Stles
@@ -54,6 +58,17 @@ const MapComp = (props) => {
         <main id="map_cont" style={style}>
 
             <div style={style} ref={mapRef} > </div>
+
+            <div>
+                <select>
+                    <option>gthos</option>
+                </select>
+
+                <select>
+
+                </select>
+
+            </div>
 
         </main>
     )

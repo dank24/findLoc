@@ -122,5 +122,11 @@
   border-radius: 2%;
   margin-top: 1%;
 }
+#home_main_cont #home_second_sec #map_div #target_icon {
+  position: absolute;
+  z-index: 1;
+  bottom: 13%;
+  left: 65%;
+}
 
 /*# sourceMappingURL=main.css.map */
