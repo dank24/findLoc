@@ -2,6 +2,7 @@
     box-sizing: border-box;
     border: none;
     margin: 0;
+    font-family: fantasy;
   }
 
   @mixin het($he: 0px, $wid: 0px, $bgc: 'blue'){
@@ -110,4 +111,8 @@
             }
         }
     }
+}
+
+.dropdown_p:hover {
+    background-color: green;
 }

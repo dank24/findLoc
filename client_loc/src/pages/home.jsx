@@ -3,13 +3,14 @@ import React, { useEffect, useState } from "react";
 import '../assets/stylesheets/main.css'
 import MapComp from "../components/map";
 import LocationCard from "../components/locationCard";
-import DropDownCard from "../components/dropDownLoc";
-import locations from '../assets/locs'
+import {locations, places} from '../assets/locs'
 import searchIcon from '../assets/images/icons/searchIcon.png'
 import targetIcon from '../assets/images/icons/targetIcon.png'
 import mapIcon from '../assets/images/icons/mapIconDef.png'
 import Search from "../components/search";
 
+import { direction } from "../utils/mapUtils";
+import DropDownCard from "../components/dropDownLoc";
 
 const Home = () => {
 
@@ -27,6 +28,10 @@ const Home = () => {
     name: '',
   }) 
 
+  const [dirToLocation, setDirToLocation] = useState({
+    dir: false
+  })
+
  
   const [uiDisplay, setUiDisplay] = useState({
     searchBar: false,
@@ -36,9 +41,14 @@ const Home = () => {
 
   //  Functions
     // get location data function
-    function getLocationData(n, l , ln) {
-      let dets = {name: n, lat: l, lng: ln}
-      setLocationData(dets)
+    function handleSideBar(n, l , ln) {
+      let obj = {name: n, lat: l, lng: ln}
+      let obj2 = {
+        dir: true,
+        destination: obj,
+        origin: userData.userLocation
+      }
+      setDirToLocation(obj2)
     }
 
     // onClick event functions
@@ -57,6 +67,15 @@ const Home = () => {
           setUiDisplay(prev => (
             {...prev, locations: !uiDisplay.locations}
           ))
+      },
+      dropdownPlaces: (e) =>{
+          let obj = JSON.parse(e.target.id)
+          let obj2 = {
+            dir: true,
+            destination: obj,
+            origin: userData.userLocation
+          }
+          setDirToLocation(obj2)
       }
     }
 
@@ -76,6 +95,12 @@ const Home = () => {
 
   console.log(userData)
 
+  let p = {
+    fontSize: '19px',
+    padding: '2px',
+    width: '100%'
+  }
+
   // Appends
   const sideBarLocations = locations.map(its => {
     return (
@@ -85,9 +110,22 @@ const Home = () => {
         lenght = '10%'
         lat =  {its.lat}
         lng =  {its.lng}
-        handleClick = {getLocationData}
+        handleClick = {handleSideBar}
       />
     ) })
+    
+    let lodges = places.lodges.map(its => {
+      return <p id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} onClick={onClickEvents.dropdownPlaces} className='dropdown_p' style={p} key={its.lat}>{its.name}</p>
+    })
+  
+    let permSite = places.PermSite.map(its =>{
+      return <p id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} onClick={onClickEvents.dropdownPlaces} className='dropdown_p' style={p} key={its.lat}>{its.name}</p>
+    })
+  
+    let termSite = places.TempSite.map(its => {
+      return <p id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} onClick={onClickEvents.dropdownPlaces} className='dropdown_p' style={p} key={its.lat}>{its.name}</p>
+    })
+
   //
       
   // UseEffects
@@ -108,7 +146,7 @@ const Home = () => {
           </div>
 
           <div onClick={onClickEvents.location} style={{height: '100%', width: '20%', backgroundColor: 'grey'}}>
-            <img disable={true} src={mapIcon} width='95%' height='80%' />
+            <img src={mapIcon} width='95%' height='80%' />
           </div>
           
         </div>
@@ -124,7 +162,11 @@ const Home = () => {
 
             {
               uiDisplay.locations &&
-              < DropDownCard />
+              < DropDownCard 
+                  permSite = {permSite}
+                  tempSite = {termSite}
+                  lodges = {lodges}
+              />
             }
 
 
@@ -150,9 +192,11 @@ const Home = () => {
               <div id="map_div">
                 <img onClick={onClickEvents.target} width='5%' src={targetIcon} id="target_icon"/> 
                 < MapComp 
+                    dir = {dirToLocation.dir ? 'true': 'false'}
                     lat = {locationData.lat}
                     lng = {locationData.lng}
                     name = {locationData.name}
+                    direction = {dirToLocation}
                 />
               </div>
 

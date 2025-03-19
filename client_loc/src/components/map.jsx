@@ -36,6 +36,16 @@ const MapComp = (props) => {
             title: title
         })
 
+        console.log(props.direction.destination)
+
+        if(props.dir == 'true'){
+            let deLat = props.direction.destination.lat
+            let deLng = props.direction.destination.lng
+            let orLat = props.direction.origin.lat
+            let orLng = props.direction.origin.lng
+          direction(deLat, deLng, attMap)
+        }
+
     }
     
     // Stles

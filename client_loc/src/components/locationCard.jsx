@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-import locations from '../assets/locs'
 import mapIconDef from '../assets/images/icons/mapIconDef.png'
 import mapIconClick from '../assets/images/icons/mapIconClick.png'
 
