@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const env = require('dotenv').config()
 const cors = require('cors')
+const process = require('process')
 
 const app = express()
 
@@ -20,7 +21,7 @@ app.use('/user', userRoute)
 
 
 const Port = 5378
-
+const mongoUrl = process.env.mongoUrl
 
 
 //  Create server
@@ -29,4 +30,6 @@ app.listen(Port, () =>{
 })
 
 //  Start Database
-mongoose.connect
+mongoose.connect(mongoUrl).then(() => {
+  console.log('DB Connected')
+}).catch(error => {console.error(error)})

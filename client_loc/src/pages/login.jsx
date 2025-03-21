@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { login } from "../utils/userUtils";
 
 const Login = () =>{
 
@@ -7,6 +10,9 @@ const Login = () =>{
     userName: '',
     userPass: '',
   })
+let navigate = useNavigate()
+
+
   
 
   //  Functions
@@ -23,7 +29,17 @@ const handleInput = (e) =>{
     //  Handle Button Function
 const handleBtn = (e) =>{
     e.preventDefault()
-    console.log(userData)
+    
+    let l = login(userData)
+    .then(data => {
+        if(data.status == 'success'){
+            let userId = data.data._id
+            navigate(`/home/${userId}`)
+        }
+        if(data.status == 'failure'){
+            
+        }
+    })
 }
 
 

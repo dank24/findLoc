@@ -18,9 +18,11 @@ const userSchema = schema({
     },
     userPass: {
         type: String,
-        required: true
     },
     savedLocations: {
+        type: Array
+    },
+    userHistory: {
         type: Array
     }
 })

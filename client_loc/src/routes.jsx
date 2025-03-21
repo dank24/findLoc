@@ -8,7 +8,7 @@ const RoutesN = () =>{
 
     <BrowserRouter>
         <Routes>
-            <Route path="/signup" element={< Signup />}></Route>
+            <Route path="/signup/?userId" element={< Signup />}></Route>
             <Route path="/login" element={< Login />}></Route>
         </Routes>
     </BrowserRouter>

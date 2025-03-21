@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import '../assets/stylesheets/main.css'
 
-import SaveToLocal from '../utils/userUtils.js'
+import {createUserApi, saveToLocal} from '../utils/userUtils.js'
 
 const Signup = () =>{
 
@@ -34,12 +34,12 @@ const Signup = () =>{
       let dataS = signUpData
       console.log(dataS)
 
-      SaveToLocal(dataS)
+      createUserApi(dataS)
     }
 
 
   // UI
-  return(
+  return( 
     <main id="signup_main_cont">
 
         <section id="signup_first_sec">

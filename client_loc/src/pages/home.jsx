@@ -9,6 +9,9 @@ import targetIcon from '../assets/images/icons/targetIcon.png'
 import mapIcon from '../assets/images/icons/mapIconDef.png'
 import Search from "../components/search";
 
+import starDef from '../assets/images/icons/starDef.png'
+import starClick from '../assets/images/icons/starClick.png'
+
 import { direction } from "../utils/mapUtils";
 import DropDownCard from "../components/dropDownLoc";
 
@@ -38,6 +41,8 @@ const Home = () => {
     locations: false
   })
 
+  const [starImage, setStarImage] = useState(starClick)
+
 
   //  Functions
     // get location data function
@@ -62,6 +67,8 @@ const Home = () => {
       target: () => {
           console.log('clicked image')
           setLocationData(userData.userLocation)
+          setDirToLocation({dir: false})
+
       },
       location: () =>{
           setUiDisplay(prev => (
@@ -69,13 +76,18 @@ const Home = () => {
           ))
       },
       dropdownPlaces: (e) =>{
-          let obj = JSON.parse(e.target.id)
+     /*      let obj = JSON.parse(e.target.id)
           let obj2 = {
             dir: true,
             destination: obj,
             origin: userData.userLocation
           }
-          setDirToLocation(obj2)
+          setDirToLocation(obj2) */
+          console.log(e.target.tagName)
+      },
+      starClick: () => {
+        console.log('fuck')
+        setStarImage(starDef)
       }
     }
 
@@ -93,12 +105,13 @@ const Home = () => {
     }
 
 
+
   console.log(userData)
 
   let p = {
     fontSize: '19px',
     padding: '2px',
-    width: '100%'
+    width: '85%'
   }
 
   // Appends
@@ -114,17 +127,7 @@ const Home = () => {
       />
     ) })
     
-    let lodges = places.lodges.map(its => {
-      return <p id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} onClick={onClickEvents.dropdownPlaces} className='dropdown_p' style={p} key={its.lat}>{its.name}</p>
-    })
-  
-    let permSite = places.PermSite.map(its =>{
-      return <p id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} onClick={onClickEvents.dropdownPlaces} className='dropdown_p' style={p} key={its.lat}>{its.name}</p>
-    })
-  
-    let termSite = places.TempSite.map(its => {
-      return <p id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} onClick={onClickEvents.dropdownPlaces} className='dropdown_p' style={p} key={its.lat}>{its.name}</p>
-    })
+
 
   //
       
@@ -163,9 +166,7 @@ const Home = () => {
             {
               uiDisplay.locations &&
               < DropDownCard 
-                  permSite = {permSite}
-                  tempSite = {termSite}
-                  lodges = {lodges}
+                  handleClick  = {onClickEvents.dropdownPlaces}
               />
             }
 
