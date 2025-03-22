@@ -93,7 +93,7 @@
     }
 
     #home_second_sec{
-        @include disp($wid: 65%, $jc: center);
+        @include disp($wid: 65%, $he: 100vh, $jc: center);
         background-color: rgb(231, 231, 215);
 
         #map_div {
@@ -115,4 +115,48 @@
 
 .dropdown_p:hover {
     background-color: green;
+}
+
+
+
+@media (max-width: 500px) {
+    #mainCont {
+        @include disp($he: 100vh);
+        overflow: hidden;
+
+        #home_first_sec {
+            display: none;
+        }
+
+        #home_second_sec {
+            @include disp($wid: 100%, $he:100vh, $disp: flex, $jc: center);
+
+            #map_div{
+                height: 90%;
+            }
+
+            #phone_nav_div {
+                @include disp($he: 8%, $wid: 99%, $disp: flex,$jc:center );
+                border: 3px solid red;
+                margin-top: 1%;
+                border-top-right-radius: 14%;
+                border-top-left-radius: 14%;
+                gap: 1%;
+
+                div {
+                    border: 1px solid green;
+                    width: 22%;
+                }
+        
+            }
+        }
+
+
+    }
+
+    #topBar {
+        display: none;
+    }
+
+
 }

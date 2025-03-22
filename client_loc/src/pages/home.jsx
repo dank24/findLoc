@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams, useLocation} from "react-router-dom";
 
 import '../assets/stylesheets/main.css'
 import MapComp from "../components/map";
@@ -13,16 +14,26 @@ import starDef from '../assets/images/icons/starDef.png'
 import starClick from '../assets/images/icons/starClick.png'
 
 import { direction } from "../utils/mapUtils";
+import { getUserdata } from "../utils/userUtils";
 import DropDownCard from "../components/dropDownLoc";
 
 const Home = () => {
 
     //  Variables
+
+  const location = useLocation()
+  const params = useParams()
+  const userId = params.userId
+
+  console.log(userId)
+  console.log(location)
+
   const [userData, setUserData] =useState({
       userLocation: {},
       userfaves: [],
       userHistory: [],
       userSearch: [],
+      userDynamicLoc: {}
   })
  
   const [locationData, setLocationData] = useState({
@@ -41,8 +52,7 @@ const Home = () => {
     locations: false
   })
 
-  const [starImage, setStarImage] = useState(starClick)
-
+ 
 
   //  Functions
     // get location data function
@@ -51,7 +61,7 @@ const Home = () => {
       let obj2 = {
         dir: true,
         destination: obj,
-        origin: userData.userLocation
+        origin: userData.userDynamicLoc
       }
       setDirToLocation(obj2)
     }
@@ -75,15 +85,16 @@ const Home = () => {
             {...prev, locations: !uiDisplay.locations}
           ))
       },
-      dropdownPlaces: (e) =>{
-     /*      let obj = JSON.parse(e.target.id)
+      dropdownPlaces: (e, s) =>{
+          let latLng = JSON.parse(e.target.id)
+
           let obj2 = {
             dir: true,
-            destination: obj,
+            destination: latLng,
             origin: userData.userLocation
           }
-          setDirToLocation(obj2) */
-          console.log(e.target.tagName)
+
+          setDirToLocation(obj2) 
       },
       starClick: () => {
         console.log('fuck')
@@ -103,6 +114,36 @@ const Home = () => {
         ))
       })
     }
+
+    //  get user data
+    let userDataUpd = async () =>{
+      getUserdata(userId)
+      .then(resp => {
+
+        setUserData(prev => (
+          {...prev, userfaves: resp.data.savedLocations, userHistory: resp.data.userHistory}
+        ))
+      
+
+      })
+    }
+
+
+    // update location dynamically
+    const getDynamicLocation = () =>{
+      navigator.geolocation.watchPosition((pos) =>{
+        let lat = pos.coords.latitude
+        let lng  = pos.coords.longitude
+  
+        let obj = {lat, lng}
+
+        setUserData(prev=> (
+          {...prev, userDynamicLoc: obj}
+        ))
+      },  )
+  
+    }
+  
 
 
 
@@ -130,16 +171,19 @@ const Home = () => {
 
 
   //
+
+  getDynamicLocation()
       
   // UseEffects
     useEffect(() =>{
       getUserLocation()
+      userDataUpd()
     }, [])
     
 
   // UI
     return (
-  <>
+  <div id="mainCont">
 
       <div id="topBar">
         <div>
@@ -167,6 +211,8 @@ const Home = () => {
               uiDisplay.locations &&
               < DropDownCard 
                   handleClick  = {onClickEvents.dropdownPlaces}
+                  data = {userData}
+                  id = {userId}
               />
             }
 
@@ -200,11 +246,10 @@ const Home = () => {
                     direction = {dirToLocation}
                 />
               </div>
-
           </section>
 
       </main>
-  </>
+  </div>
 
 
     )

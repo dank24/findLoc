@@ -27,9 +27,10 @@ export const login = async (dataS) => {
     return s
 }
 
-//  getUserData
+//  update UserData
 export const updUserInfo = async (id, sData) => {
-    let api = fetch(`http://localhost:5378/user/upduserinfo/${id}`, {
+    let s;
+     let api = await fetch(`http://localhost:5378/user/upduserinfo/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -38,9 +39,25 @@ export const updUserInfo = async (id, sData) => {
         body: JSON.stringify(sData)
     })
     .then(resp => resp.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error))
+    .then(data => {console.log(data); s = data})
+    .catch(error => console.error(error)) 
+
+    return s
 }
+
+//  get user data 
+ export const getUserdata = async (id) => {
+        let s;
+    let api = await fetch(`http://localhost:5378/user/getuserdata/${id}`)
+    .then(resp => resp.json())
+    .then(data => {
+        s = data
+        return s
+    })
+    .catch(error =>  console.error(error))
+    return (s)
+ }
+
 
 //  Save to LocalStorage
 export const saveToLocal = (dataS) =>{

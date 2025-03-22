@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, memo} from "react";
 import { useLocation } from "react-router-dom";
 
-import { direction, } from "../utils/mapUtils";
+import { direction, updateDirection } from "../utils/mapUtils";
 
 const MapComp = (props) => {
   //  Variables
@@ -15,6 +15,7 @@ const MapComp = (props) => {
 
     const api_key =  'AIzaSyCjWzAIoSJYb38wnavpQ6Wh4yER15NMcko'
     let mapRef = useRef(null)
+    let textRef =  useRef(null)
 
   //  Functions
 
@@ -39,11 +40,23 @@ const MapComp = (props) => {
         console.log(props.direction.destination)
 
         if(props.dir == 'true'){
-            let deLat = props.direction.destination.lat
+             let deLat = props.direction.destination.lat
             let deLng = props.direction.destination.lng
             let orLat = props.direction.origin.lat
             let orLng = props.direction.origin.lng
-          direction(deLat, deLng, attMap)
+            direction(textRef, deLat, deLng, attMap) 
+
+          let or = {
+            lat: Number(props.direction.origin.lat),
+            lng: Number(props.direction.origin.lng),
+          }
+          let des = {
+            lat: Number(props.direction.destination.lat),
+            lng: Number(props.direction.destination.lng)
+          }
+
+         //updateDirection(textRef, or, des,attMap)
+
         }
 
     }
@@ -69,15 +82,11 @@ const MapComp = (props) => {
 
             <div style={style} ref={mapRef} > </div>
 
-            <div>
-                <select>
-                    <option>gthos</option>
-                </select>
-
-                <select>
-
-                </select>
-
+            <div id="phone_nav_div" ref={textRef}>
+                <div>=</div>
+                <div>=</div>
+                <div>=</div>
+                <div>=</div>
             </div>
 
         </main>

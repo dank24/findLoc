@@ -1,14 +1,93 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 import { places } from '../assets/locs'
 import starClick from '../assets/images/icons/starClick.png'
 import starDef from '../assets/images/icons/starDef.png'
 
+import { updUserInfo, getUserdata } from '../utils/userUtils'
+
 
 const DropDownCard = (props) => {
 
   //Variables
+
+  let userData = props.data
+  console.log(userData.userfaves)
   const [imgClicked, setImgClicked] = useState(false)
+  let [favesArray, setFavesArray] = useState(userData.userfaves)
+
+  const handleClick = (es,) =>{
+
+    let siblingNode = es.target.previousElementSibling
+
+    let starClickString = 'http://localhost:5173/src/assets/images/icons/starClick.png'
+    let starDefString = 'http://localhost:5173/src/assets/images/icons/starDef.png'
+
+    let arr = ['DEP Of Anatomy', 'AE-FUNAI Solar Farm']
+
+    if(es.target.src == starDefString){
+      let locText = siblingNode.innerHTML
+      es.target.src = starClick
+      addToList(userData.userfaves, locText )
+    }
+    else {
+      es.target.src = starDef
+      let locText = siblingNode.innerHTML
+      rmFromList(userData.userfaves, locText)
+    }
+
+    function rmFromList(arr, itR){
+      if(arr.some(its => its === itR)){
+        let i = arr.findIndex(it =>  it == itR)
+        arr.splice(i, 1)
+        
+        let d = {
+          name: 'faves',
+          data: arr
+        }
+        updUserInfo(props.id, d)
+        .then(resp => setFavesArray(resp.data.savedLocations))
+      }
+    }
+
+
+    function addToList(arr, itA){
+      if(!arr.some(it => it === itA)){
+        arr.push(itA)
+        
+        let d = {
+          name: 'faves',
+          data: arr
+        }
+        updUserInfo(props.id, d)
+        updUserInfo(props.id, d)
+        .then(resp => setFavesArray(resp.data.savedLocations))
+      }
+    } 
+
+    props.handleClick(es)
+
+
+  }
+
+  // useEffect
+useEffect(() => {
+
+  let imgs = document.querySelectorAll('.imgs') 
+
+  imgs.forEach(e => {
+    let siblText = e.previousElementSibling.innerHTML
+    console.log('this happend')
+
+    if(favesArray.some(its => its === siblText)){
+      e.src = starClick
+    } else {
+      e.src = starDef
+    }
+  })
+
+}, [])
 
 
   let style = {
@@ -72,11 +151,28 @@ const DropDownCard = (props) => {
   let permSite = places.PermSite.map(its =>{
     return(
       <div style={style3.div}>
-        <p id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
-        <img id={its.name} onClick={props.handleClick} height='90%' width='10%' src={imgClicked ? starClick : starDef} />
+        <p onClick={props.handleClick} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
+        <img id={`{"lat": "${its.lat}", "lng": "${its.lng}"}`} onClick={e =>handleClick(e, its.name)} className='imgs' height='90%' width='10%' />
       </div>
     ) 
   })
+  let termSite = places.TempSite.map(its =>{
+    return(
+      <div style={style3.div}>
+        <p onClick={props.handleClick} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
+        <img id={`{"lat": "${its.lat}", "lng": "${its.lng}"}`} onClick={e =>handleClick(e, its.name)} className='imgs' height='90%' width='10%' />
+      </div>
+    ) 
+  })
+  let lodges = places.lodges.map(its =>{
+    return(
+      <div style={style3.div}>
+        <p onClick={props.handleClick} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
+        <img id={`{"lat": "${its.lat}", "lng": "${its.lng}"}`} onClick={e =>handleClick(e, its.name)} className='imgs' height='90%' width='10%' />
+      </div>
+    ) 
+  })
+
 
 
   // UI
@@ -86,7 +182,7 @@ const DropDownCard = (props) => {
       <section style={styles2.secs} id='dropdownCard_first_sec'>
           <div style={styles2.divs} id='1sec_1div'>
 
-            <h3 style={{marginLeft: '2%', }}>Temp Site</h3>
+            <h3 style={{marginLeft: '2%', }}>Perm Site</h3>
 
             <div style={{marginLeft: '5%', border: '1px solid green', height: '85%'}}>
               
@@ -97,13 +193,28 @@ const DropDownCard = (props) => {
           </div>
 
           <div style={styles2.divs} id='1sec_2div'>
-      
+
+              <h3 style={{marginLeft: '2%', }}>Temp Site</h3>
+
+              <div style={{marginLeft: '5%', border: '1px solid green', height: '85%'}}>
+                
+                  {termSite}
+                  
+              </div>      
           </div>
       </section>
 
       <section style={styles2.secs} id='dropdownCard_second_sec'>
+
           <div style={styles2.divs} id='2sec_1div'>
-             
+              
+              <h3 style={{marginLeft: '2%', }}>Lodges Site</h3>
+
+              <div style={{marginLeft: '5%', border: '1px solid green', height: '85%'}}>
+                
+                  {lodges}
+                  
+              </div>
           </div>
 
           <div style={styles2.divs} id='2sec_2div'>

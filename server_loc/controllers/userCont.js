@@ -63,5 +63,51 @@ exports.login = asyncHandler(
 exports.updUserInfo = asyncHandler(
     async(req, res, next) => {
         let userId = await req.params.userId
+        let rData = await req.body
+        console.log(rData)
+        console.log(userId)
+        
+        let user = await usermodel.findOne({_id: userId})
+
+        try {
+            if(rData.name == 'faves'){
+                await usermodel.updateOne({_id: userId},
+                {$set: {savedLocations: rData.data}}
+                )      
+                return res.status(200).json({message: 'favorites updated', status: 'success', data: user})
+            }
+
+            if(rData.name == 'history'){
+                console.log('history')
+            }
+        } catch (error) {
+            return res.status(400).json({message: error.message, action: 'error', status: 'error'})
+        }
+        
+    }
+)
+
+exports.getUserData = asyncHandler(
+    async (req, res, next) =>{
+        let userId = await req.params.userId
+        
+        let user = await usermodel.findOne({_id: userId})
+
+        try {
+            if(user){
+                let sData = {
+                    userName: user.userName,
+                    userName: user.userEmail,
+                    userHistory: user.userHistory,
+                    savedLocations: user.savedLocations,
+                }
+                return res.status(200).json({message: 'user found', data: sData, status: 'success'})
+            }
+            if(!user){
+                return res.status(400).json({message: 'user not found', status: 'failure'})
+            }
+        } catch (error) {
+            return res.status(400).json({message: error.message, status: 'failure'})
+        }
     }
 )
