@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import mapIconDef from '../assets/images/icons/mapIconDef.png'
-import mapIconClick from '../assets/images/icons/mapIconClick.png'
+import mapIconDef from '../assets/images/icons/mapIconDef.svg'
+import mapIconClick from '../assets/images/icons/mapIconClick.svg'
 
 
 const LocationCard = (props) =>{
@@ -36,8 +36,8 @@ const LocationCard = (props) =>{
         alignItems: 'center'
     },
     img: {
-        width: '20%',
-        height: '80%'
+        width: '30%',
+        height: '90%'
     },
     h1: {
         width: '90%'

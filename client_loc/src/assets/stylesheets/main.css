@@ -49,9 +49,10 @@
   flex-direction: row-reverse;
   align-items: 0;
   justify-content: 0;
-  background-color: green;
+  background-color: rgb(65, 70, 69);
+  border: 1px solid black;
 }
-#topBar div {
+#topBar #topbarFirstDiv {
   display: flex;
   height: 100%;
   width: 100%;
@@ -61,10 +62,11 @@
   height: 100%;
   width: 30%;
   background-color: "blue";
-  gap: 3%;
+  gap: 1%;
   margin-right: 2%;
+  border: 1px solid green;
 }
-#topBar div #image_div {
+#topBar #topbarFirstDiv .image_div {
   height: 100%;
   width: 20%;
   background-color: rgb(110, 110, 216);
@@ -83,6 +85,7 @@
   flex-direction: row;
   align-items: 0;
   justify-content: 0;
+  overflow: hidden;
 }
 #home_main_cont #home_first_sec {
   display: flex;
@@ -91,7 +94,7 @@
   flex-direction: column;
   align-items: 0;
   justify-content: 0;
-  background-color: rgb(131, 121, 121);
+  background-color: rgba(157, 175, 175, 0.534);
 }
 #home_main_cont #home_first_sec #sec1_div1 {
   display: flex;
@@ -104,8 +107,8 @@
   gap: 2%;
 }
 #home_main_cont #home_first_sec #sec1_div2 {
-  height: 90%;
-  border: 5px solid rgb(240, 247, 240);
+  height: 50%;
+  border: 1px solid rgb(240, 247, 240);
 }
 #home_main_cont #home_second_sec {
   display: flex;
@@ -117,17 +120,18 @@
   background-color: rgb(231, 231, 215);
 }
 #home_main_cont #home_second_sec #map_div {
-  border: 1px solid green;
-  height: 90%;
-  width: 98%;
+  height: 99%;
+  width: 100%;
   border-radius: 2%;
-  margin-top: 1%;
 }
 #home_main_cont #home_second_sec #map_div #target_icon {
   position: absolute;
   z-index: 1;
   bottom: 13%;
   left: 65%;
+}
+#home_main_cont #home_second_sec #phoneUICont {
+  display: none;
 }
 
 .dropdown_p:hover {
@@ -137,7 +141,7 @@
 @media (max-width: 500px) {
   #mainCont {
     display: flex;
-    height: 100vh;
+    height: 100dvh;
     width: 100%;
     flex-direction: row;
     align-items: 0;
@@ -158,22 +162,40 @@
   #mainCont #home_second_sec #map_div {
     height: 90%;
   }
-  #mainCont #home_second_sec #phone_nav_div {
+  #mainCont #home_second_sec #map_div #target_icon {
+    height: 5%;
+    width: 15%;
+    background-color: red;
+    position: absolute;
+    left: 80%;
+    top: 70%;
+  }
+  #mainCont #home_second_sec #phoneUICont {
     display: flex;
-    height: 8%;
-    width: 99%;
+    height: 11%;
+    width: 100%;
+  }
+  #mainCont #home_second_sec #phoneUICont #phone_nav_div {
+    display: flex;
+    height: 100%;
+    width: 100%;
     flex-direction: row;
     align-items: 0;
     justify-content: center;
-    border: 3px solid red;
-    margin-top: 1%;
+    border: 3px solid black;
     border-top-right-radius: 14%;
     border-top-left-radius: 14%;
-    gap: 1%;
+    gap: 2%;
   }
-  #mainCont #home_second_sec #phone_nav_div div {
-    border: 1px solid green;
-    width: 22%;
+  #mainCont #home_second_sec #phoneUICont #phone_nav_div div {
+    border: 1px solid rgb(181, 190, 181);
+    width: 23%;
+  }
+  #mainCont #home_second_sec #phoneUICont #phone_nav_div div img {
+    margin-top: 7%;
+    background-color: rgb(206, 193, 193);
+    width: 90%;
+    height: 89%;
   }
   #topBar {
     display: none;

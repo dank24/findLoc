@@ -50,15 +50,18 @@
 
 #topBar {
     @include disp($he: 6vh, $wid: 100vw, $dir: row-reverse);
-    background-color: green;
+    background-color: rgb(65, 70, 69);
+    border: 1px solid black;
+    
 
-    div{
+    #topbarFirstDiv{
         @include disp($dir: row-reverse, $ai: center);
         @include het($wid: 30%, $he: 100%);
-        gap: 3%;
+        gap: 1%;
         margin-right: 2%;
+        border: 1px solid green;
 
-        #image_div{
+        .image_div{
             @include het($he: 100%, $wid: 20%, $bgc: rgb(110, 110, 216) );
             display: flex;
             justify-content: center;
@@ -74,10 +77,11 @@
 
 #home_main_cont {
     @include disp($he: 94vh, $wid: 100vw, $dir: row);
+    overflow: hidden;
 
     #home_first_sec{
-        @include disp($he: 100%, $wid: 35%, $dir: column);
-        background-color: rgb(131, 121, 121);
+        @include disp($he: 100%, $wid: 35%, $dir: column, );
+        background-color: rgba(157, 175, 175, 0.534);
 
         #sec1_div1{
             @include disp($he: 6%, $wid: 100%, $jc: center);
@@ -87,8 +91,8 @@
         }
 
         #sec1_div2 {
-            height: 90%;
-            border: 5px solid rgb(240, 247, 240);
+            height: 50%;
+            border: 1px solid rgb(240, 247, 240);
         }
     }
 
@@ -97,11 +101,9 @@
         background-color: rgb(231, 231, 215);
 
         #map_div {
-            border: 1px solid green;
-            height: 90%;
-            width: 98%;
+            height: 99%;
+            width: 100%;
             border-radius: 2%;
-            margin-top: 1%;
 
             #target_icon {
                 position: absolute;
@@ -109,7 +111,14 @@
                 bottom: 13%;
                 left: 65%;
             }
+
+            
         }
+
+        #phoneUICont{
+            display: none;
+        }
+        
     }
 }
 
@@ -119,9 +128,10 @@
 
 
 
+
 @media (max-width: 500px) {
     #mainCont {
-        @include disp($he: 100vh);
+        @include disp($he: 100dvh);
         overflow: hidden;
 
         #home_first_sec {
@@ -133,22 +143,44 @@
 
             #map_div{
                 height: 90%;
-            }
 
-            #phone_nav_div {
-                @include disp($he: 8%, $wid: 99%, $disp: flex,$jc:center );
-                border: 3px solid red;
-                margin-top: 1%;
-                border-top-right-radius: 14%;
-                border-top-left-radius: 14%;
-                gap: 1%;
-
-                div {
-                    border: 1px solid green;
-                    width: 22%;
+                #target_icon {
+                    height: 5%;
+                    width: 15%;
+                    background-color: red;
+                    position: absolute;
+                    left: 80%;
+                    top: 70%;
                 }
-        
             }
+
+            #phoneUICont{
+                display: flex;
+                height: 11%;
+                width: 100%;
+                
+                #phone_nav_div {
+                    @include disp($he: 100%, $wid: 100%, $disp: flex,$jc:center);
+                    border: 3px solid black;
+                    border-top-right-radius: 14%;
+                    border-top-left-radius: 14%;
+                    gap: 2%;
+    
+                    div {
+                        border: 1px solid rgb(181, 190, 181);
+                        width: 23%;
+    
+                        img {
+                            margin-top: 7%;
+                            background-color: rgb(206, 193, 193);
+                            width: 90%;
+                            height: 89%;
+                        }
+                    }
+            
+                }
+            }
+
         }
 
 

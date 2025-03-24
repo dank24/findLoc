@@ -68,6 +68,7 @@ exports.updUserInfo = asyncHandler(
         console.log(userId)
         
         let user = await usermodel.findOne({_id: userId})
+        console.log(user)
 
         try {
             if(rData.name == 'faves'){
@@ -78,7 +79,11 @@ exports.updUserInfo = asyncHandler(
             }
 
             if(rData.name == 'history'){
-                console.log('history')
+                //let updData = user.userHistory.push(r)
+                await usermodel.updateOne({_id: userId},
+                    {$set: {userHistory: rData.data}}
+                )
+                return res.status(200).json({message: 'history updated', status: 'success'})
             }
         } catch (error) {
             return res.status(400).json({message: error.message, action: 'error', status: 'error'})

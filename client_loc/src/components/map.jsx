@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 
 import { direction, updateDirection } from "../utils/mapUtils";
 
+import PhoneUi from "./phoneUi";
+
 const MapComp = (props) => {
   //  Variables
     const mapLocData = {
@@ -10,6 +12,8 @@ const MapComp = (props) => {
         lng: Number(props.lng),
         name: props.name,
     }
+
+
 
     const [userCoorinates, setUsercCoordinates] = useState({})
 
@@ -60,6 +64,11 @@ const MapComp = (props) => {
         }
 
     }
+
+    const handleCLick = () => {
+
+    }
+
     
     // Stles
     const style = {
@@ -79,14 +88,10 @@ const MapComp = (props) => {
     // UI
     return(
         <main id="map_cont" style={style}>
-
             <div style={style} ref={mapRef} > </div>
 
-            <div id="phone_nav_div" ref={textRef}>
-                <div>=</div>
-                <div>=</div>
-                <div>=</div>
-                <div>=</div>
+            <div id="phoneUICont" ref={textRef}>
+                < PhoneUi />
             </div>
 
         </main>

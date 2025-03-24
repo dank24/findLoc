@@ -5,9 +5,9 @@ import '../assets/stylesheets/main.css'
 import MapComp from "../components/map";
 import LocationCard from "../components/locationCard";
 import {locations, places} from '../assets/locs'
-import searchIcon from '../assets/images/icons/searchIcon.png'
-import targetIcon from '../assets/images/icons/targetIcon.png'
-import mapIcon from '../assets/images/icons/mapIconDef.png'
+import searchIcon from '../assets/images/icons/searchIcon.svg'
+import targetIcon from '../assets/images/icons/targetIcon.svg'
+import mapIcon from '../assets/images/icons/mapIconDef.svg'
 import Search from "../components/search";
 
 import starDef from '../assets/images/icons/starDef.png'
@@ -99,6 +99,9 @@ const Home = () => {
       starClick: () => {
         console.log('fuck')
         setStarImage(starDef)
+      },
+      phoneNav: () => {
+        console.log('clicked')
       }
     }
 
@@ -155,16 +158,19 @@ const Home = () => {
     width: '85%'
   }
 
+console.log(userData.userHistory)
+
   // Appends
-  const sideBarLocations = locations.map(its => {
+  const sideBarLocations = userData.userHistory.map(its => {
     return (
       < LocationCard 
         name = {its.name}
         key = {its.name}
-        lenght = '10%'
+        lenght = '20%'
         lat =  {its.lat}
         lng =  {its.lng}
         handleClick = {handleSideBar}
+
       />
     ) })
     
@@ -177,7 +183,7 @@ const Home = () => {
   // UseEffects
     useEffect(() =>{
       getUserLocation()
-      userDataUpd()
+     userDataUpd()
     }, [])
     
 
@@ -186,17 +192,20 @@ const Home = () => {
   <div id="mainCont">
 
       <div id="topBar">
-        <div>
+
+        <div id="topbarFirstDiv">
           
-          <div onClick={onClickEvents.search} id="image_div">
-            <img width='30px' height='30px' src={searchIcon} />  
+          <div onClick={onClickEvents.search} className="image_div">
+            <img width='100%' height='100%' src={searchIcon} />  
           </div>
 
-          <div onClick={onClickEvents.location} style={{height: '100%', width: '20%', backgroundColor: 'grey'}}>
-            <img src={mapIcon} width='95%' height='80%' />
+          <div className="image_div" onClick={onClickEvents.location} style={{backgroundColor: 'gray'}} >
+            <img src={mapIcon} width='100%' height='100%' />
           </div>
           
         </div>
+
+
 
       </div>
 
@@ -244,6 +253,7 @@ const Home = () => {
                     lng = {locationData.lng}
                     name = {locationData.name}
                     direction = {dirToLocation}
+                    phoneNavClick = {onClickEvents.phoneNav}
                 />
               </div>
           </section>

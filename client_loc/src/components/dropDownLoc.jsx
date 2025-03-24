@@ -71,6 +71,29 @@ const DropDownCard = (props) => {
 
   }
 
+  const handlePClick = (e) => {
+    let locData = JSON.parse(e.target.id)
+    let obj = {
+      ...locData,
+      name: e.target.innerHTML
+    }
+
+    if(!userData.userHistory.some(its => its.name == e.target.innerHTML)){
+      let arr = [obj, ...userData.userHistory]
+    }
+
+    if(userData.userHistory.lenght > 5){
+      arr.pop()
+      console.log(arr)
+    }
+    let sData = {
+      name: 'history',
+      data: arr
+    }
+
+    updUserInfo(props.id, sData )
+  }
+
   // useEffect
 useEffect(() => {
 
@@ -151,7 +174,7 @@ useEffect(() => {
   let permSite = places.PermSite.map(its =>{
     return(
       <div style={style3.div}>
-        <p onClick={props.handleClick} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
+        <p onClick={e => {props.handleClick; handlePClick(e)}} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
         <img id={`{"lat": "${its.lat}", "lng": "${its.lng}"}`} onClick={e =>handleClick(e, its.name)} className='imgs' height='90%' width='10%' />
       </div>
     ) 
