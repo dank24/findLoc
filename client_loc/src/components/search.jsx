@@ -11,20 +11,21 @@ const Search = () =>{
 
 
   const style = {
-    position: 'absolute',
-    zIndex: '1',
-    height: '50%',
-    width:'45%',
-    right: '4px',
+    position: 'absolute', zIndex: '1', height: '50%',
+    width:'45%', right: '4px',
 
     input: {
-        height: '15%',
-        width: '100%',
-        borderRaduis: '8%',
-        border: '1px solid black',
-        fontSize: '20px',
+        height: '15%', width: '100%', borderRaduis: '8%',
+        border: '1px solid black', fontSize: '20px',
         textAlign: 'center'
+    },
+
+    div: {
+      border: '1px solid red',
+      height: '100%',
+      width: '100%'
     }
+    
   }
 
   // UI
@@ -35,6 +36,10 @@ const Search = () =>{
         <input onChange={
             e => searchFunc(e)
         } style={style.input} placeholder="Input Location"/>
+
+        <div style={style.div}> 
+
+        </div>
 
     </main>
 

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import { places } from '../assets/locs'
-import starClick from '../assets/images/icons/starClick.png'
-import starDef from '../assets/images/icons/starDef.png'
+import starClick from '../assets/images/icons/starClick.svg'
+import starDef from '../assets/images/icons/starDef.svg'
 
 import { updUserInfo, getUserdata } from '../utils/userUtils'
 
@@ -145,28 +145,30 @@ useEffect(() => {
         flexDirection: 'column',
         width: '47%',
         height: '98%',
-        overFlow: 'scroll',
+        overflow: 'hidden',
         borderLeft: '1px solid white',
-        borderBottom: '1px solid white'
+        borderBottom: '1px solid white',
+        gap: '5%'
     },
     p: {
+      textOverflow: 'ellipsis',
       fontSize: '19px',
       padding: '2px',
-      width: '85%',
-      border: '1px solid black',
+      width: '80%',
       height: '100%',
-      overFlow: 'hidden'
+      overflow: 'hidden'
  
     }
   }
 
   let style3 = {
     div: {
-      border: '1px solid gold', 
-      height: '18%',
+      height: '19%',
       display: 'flex',
       flexDirection: 'row',
-      overFlow: 'hidden'
+      overflow: 'hidden',
+      borderBottom: '1px solid black',
+
     }
   }
 
@@ -175,7 +177,7 @@ useEffect(() => {
     return(
       <div style={style3.div}>
         <p onClick={e => {props.handleClick; handlePClick(e)}} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
-        <img id={`{"lat": "${its.lat}", "lng": "${its.lng}"}`} onClick={e =>handleClick(e, its.name)} className='imgs' height='90%' width='10%' />
+        <img id={`{"lat": "${its.lat}", "lng": "${its.lng}"}`} onClick={e =>handleClick(e, its.name)} className='imgs' height='100%' width='13%' />
       </div>
     ) 
   })
@@ -207,7 +209,7 @@ useEffect(() => {
 
             <h3 style={{marginLeft: '2%', }}>Perm Site</h3>
 
-            <div style={{marginLeft: '5%', border: '1px solid green', height: '85%'}}>
+            <div className='divScroll' style={{marginLeft: '4%', border: '1px solid green', height: '85%'}}>
               
                 {permSite}
                 
@@ -219,7 +221,7 @@ useEffect(() => {
 
               <h3 style={{marginLeft: '2%', }}>Temp Site</h3>
 
-              <div style={{marginLeft: '5%', border: '1px solid green', height: '85%'}}>
+              <div className='divScroll' style={{marginLeft: '4%', border: '1px solid green', height: '85%'}}>
                 
                   {termSite}
                   
@@ -233,14 +235,14 @@ useEffect(() => {
               
               <h3 style={{marginLeft: '2%', }}>Lodges Site</h3>
 
-              <div style={{marginLeft: '5%', border: '1px solid green', height: '85%'}}>
+              <div className='divScroll' style={{marginLeft: '4%', border: '1px solid green', height: '85%',}}>
                 
                   {lodges}
                   
               </div>
           </div>
 
-          <div style={styles2.divs} id='2sec_2div'>
+          <div className='divScroll' style={styles2.divs} id='2sec_2div'>
               <h3 style={{marginLeft: '2%', }}>Perm Site</h3>
              
           </div>

@@ -51,27 +51,45 @@
   justify-content: 0;
   background-color: rgb(65, 70, 69);
   border: 1px solid black;
+  position: relative;
 }
 #topBar #topbarFirstDiv {
   display: flex;
   height: 100%;
   width: 100%;
   flex-direction: row-reverse;
-  align-items: center;
+  align-items: 0;
   justify-content: 0;
   height: 100%;
   width: 30%;
   background-color: "blue";
-  gap: 1%;
   margin-right: 2%;
-  border: 1px solid green;
+  gap: 3%;
 }
 #topBar #topbarFirstDiv .image_div {
   height: 100%;
   width: 20%;
   background-color: rgb(110, 110, 216);
   display: flex;
+}
+#topBar #topbarFirstDiv .p_div {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
   justify-content: center;
+  height: 39px;
+  width: 39px;
+  background-color: rgb(113, 113, 182);
+  display: flex;
+  text-align: center;
+  font-size: 200%;
+  border: 1px solid rgb(39, 27, 27);
+  border-radius: 50%;
+}
+#topBar #topbarSecondDiv {
+  margin-left: 200px;
 }
 
 .loc_card_cont:hover {
@@ -136,6 +154,14 @@
 
 .dropdown_p:hover {
   background-color: green;
+}
+
+.divScroll {
+  overflow: scroll;
+}
+
+.divScroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
 }
 
 @media (max-width: 500px) {

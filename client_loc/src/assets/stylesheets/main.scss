@@ -49,25 +49,37 @@
 }
 
 #topBar {
-    @include disp($he: 6vh, $wid: 100vw, $dir: row-reverse);
+    @include disp($he: 6vh, $wid: 100vw, $dir: row-reverse, $disp: flex);
     background-color: rgb(65, 70, 69);
     border: 1px solid black;
-    
+    position: relative;
 
     #topbarFirstDiv{
-        @include disp($dir: row-reverse, $ai: center);
+        @include disp($dir: row-reverse,);
         @include het($wid: 30%, $he: 100%);
-        gap: 1%;
         margin-right: 2%;
-        border: 1px solid green;
+        gap: 3%;
+
 
         .image_div{
             @include het($he: 100%, $wid: 20%, $bgc: rgb(110, 110, 216) );
             display: flex;
-            justify-content: center;
+        }
+        .p_div{
+            @include disp($jc: center, $ai: center );
+            @include het($he: 39px, $wid: 39px, $bgc: rgb(113, 113, 182) );
+            display: flex;
+            text-align: center;
+            font-size: 200%;
+            border: 1px solid rgb(39, 27, 27);
+            border-radius: 50%;
         }
 
 
+    }
+
+    #topbarSecondDiv{
+        margin-left: 200px;
     }
 }
 
@@ -126,6 +138,13 @@
     background-color: green;
 }
 
+.divScroll{
+    overflow: scroll;
+}
+.divScroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+  }
+    
 
 
 

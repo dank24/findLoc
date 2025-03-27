@@ -183,7 +183,7 @@ console.log(userData.userHistory)
   // UseEffects
     useEffect(() =>{
       getUserLocation()
-     userDataUpd()
+     //userDataUpd()
     }, [])
     
 
@@ -195,6 +195,10 @@ console.log(userData.userHistory)
 
         <div id="topbarFirstDiv">
           
+          <div onClick={onClickEvents.search} className="p_div">
+            <p style={{textAlign: 'center'}}>s</p> 
+          </div>
+
           <div onClick={onClickEvents.search} className="image_div">
             <img width='100%' height='100%' src={searchIcon} />  
           </div>
@@ -203,6 +207,10 @@ console.log(userData.userHistory)
             <img src={mapIcon} width='100%' height='100%' />
           </div>
           
+        </div>
+
+        <div id="topbarSecondDiv">
+
         </div>
 
 

@@ -51,12 +51,12 @@ export const places = {
     ],
     PermSite: [
         {
-            name: 'AE-FUNIA FAC Of Engineering',
+            name: 'FAC Of Engineering',
             lat: 6.12793,
             lng: 8.14074
         },	
         {
-            name: 'AE-FUNAI Solar Farm',
+            name: 'Solar Farm',
             lat: 6.12656,
             lng: 8.13994
         },	
