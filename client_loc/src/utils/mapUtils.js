@@ -6,7 +6,7 @@ export const direction = async (ref, deLat, deLng, map) => {
 
   const useMap = directionsRenderer.setMap(map)
   console.log(ref)
-  //let dt = directionsRenderer.setPanel(ref.current)
+  let dt = directionsRenderer.setPanel(ref.current)
 //{lat: 6.13358, lng: 8.13880}
 
   const req = {

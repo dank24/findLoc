@@ -74,6 +74,10 @@ const MapComp = (props) => {
     const style = {
         width: '100%',
         height: '100%',
+
+        newDiv: { position: 'absolute', height: '49%', 
+          width: '35%', top: '50%', left: '1px', overflow: 'scroll', 
+        }
     }
 
     console.log(mapLocData)
@@ -88,10 +92,14 @@ const MapComp = (props) => {
     // UI
     return(
         <main id="map_cont" style={style}>
-            <div style={style} ref={mapRef} > </div>
+            <div id="map" style={style} ref={mapRef} > </div>
 
-            <div id="phoneUICont" ref={textRef}>
+            <div id="phoneUICont" >
                 < PhoneUi />
+            </div>
+
+            <div id="mapDirections" ref={textRef} style={style.newDiv}>
+
             </div>
 
         </main>

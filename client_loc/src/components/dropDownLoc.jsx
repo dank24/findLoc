@@ -167,7 +167,7 @@ useEffect(() => {
       display: 'flex',
       flexDirection: 'row',
       overflow: 'hidden',
-      borderBottom: '1px solid black',
+      borderBottom: '1px solid rgba(157, 175, 200, 0.534)',
 
     }
   }
@@ -209,7 +209,7 @@ useEffect(() => {
 
             <h3 style={{marginLeft: '2%', }}>Perm Site</h3>
 
-            <div className='divScroll' style={{marginLeft: '4%', border: '1px solid green', height: '85%'}}>
+            <div className='divScroll' style={{marginLeft: '4%', border: '1px solid rgba(157, 175, 175, 0.534)', height: '85%'}}>
               
                 {permSite}
                 
@@ -221,7 +221,7 @@ useEffect(() => {
 
               <h3 style={{marginLeft: '2%', }}>Temp Site</h3>
 
-              <div className='divScroll' style={{marginLeft: '4%', border: '1px solid green', height: '85%'}}>
+              <div className='divScroll' style={{marginLeft: '4%', border: '1px solid rgba(157, 175, 175, 0.534)', height: '85%'}}>
                 
                   {termSite}
                   
@@ -235,7 +235,7 @@ useEffect(() => {
               
               <h3 style={{marginLeft: '2%', }}>Lodges Site</h3>
 
-              <div className='divScroll' style={{marginLeft: '4%', border: '1px solid green', height: '85%',}}>
+              <div className='divScroll' style={{marginLeft: '4%', border: '1px solid rgba(157, 175, 175, 0.534)', height: '85%',}}>
                 
                   {lodges}
                   

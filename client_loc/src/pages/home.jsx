@@ -16,6 +16,7 @@ import starClick from '../assets/images/icons/starClick.png'
 import { direction } from "../utils/mapUtils";
 import { getUserdata } from "../utils/userUtils";
 import DropDownCard from "../components/dropDownLoc";
+import ProfileMenu from "../components/profileMenu";
 
 const Home = () => {
 
@@ -49,7 +50,8 @@ const Home = () => {
  
   const [uiDisplay, setUiDisplay] = useState({
     searchBar: false,
-    locations: false
+    locations: false,
+    profile: false
   })
 
  
@@ -68,11 +70,31 @@ const Home = () => {
 
     // onClick event functions
     const onClickEvents = {
+      mainSec: (e) => {
+        let id = e.target.id
+
+        if(id == 'map' || id == 'sec1_div2' || id == 'mapDirections'){
+          let t = {
+            searchBar: false,
+            locations: false
+          }
+          setUiDisplay(t)
+        }
+        
+      },
+      profile: () => {
+          setUiDisplay(prev => (
+            {...prev, profile: !uiDisplay.profile}
+          ))
+      },
       search: () => {
-          console.log('clik')
           setUiDisplay(prev => (
           {...prev, searchBar: !uiDisplay.searchBar}
           )) 
+
+          if(uiDisplay.locations){
+            onClickEvents.location()
+          }
       },
       target: () => {
           console.log('clicked image')
@@ -84,6 +106,11 @@ const Home = () => {
           setUiDisplay(prev => (
             {...prev, locations: !uiDisplay.locations}
           ))
+
+          if(uiDisplay.searchBar){
+            onClickEvents.search()
+          }
+          
       },
       dropdownPlaces: (e, s) =>{
           let latLng = JSON.parse(e.target.id)
@@ -102,6 +129,15 @@ const Home = () => {
       },
       phoneNav: () => {
         console.log('clicked')
+      },
+      searchSelect: (e) =>{
+        let obj = {
+          dir: true,
+          destination: {lat: e.lat, lng: e.lng},
+          origin: userData.userLocation
+        }
+        setDirToLocation(obj)
+        onClickEvents.search()
       }
     }
 
@@ -195,16 +231,16 @@ console.log(userData.userHistory)
 
         <div id="topbarFirstDiv">
           
-          <div onClick={onClickEvents.search} className="p_div">
-            <p style={{textAlign: 'center'}}>s</p> 
+          <div onClick={onClickEvents.profile} className="p_div">
+            <p className="homeImgs" style={{textAlign: 'center'}}>s</p> 
           </div>
 
           <div onClick={onClickEvents.search} className="image_div">
-            <img width='100%' height='100%' src={searchIcon} />  
+            <img className="homeImgs" width='100%' height='100%' src={searchIcon} />  
           </div>
 
           <div className="image_div" onClick={onClickEvents.location} style={{backgroundColor: 'gray'}} >
-            <img src={mapIcon} width='100%' height='100%' />
+            <img className="homeImgs" src={mapIcon} width='100%' height='100%' />
           </div>
           
         </div>
@@ -217,11 +253,18 @@ console.log(userData.userHistory)
 
       </div>
 
-      <main style={{}} id="home_main_cont">
+      <main onClick={e => onClickEvents.mainSec(e)} style={{}} id="home_main_cont">
+
+            {
+              uiDisplay.profile &&
+              < ProfileMenu />
+            }
 
             {
               uiDisplay.searchBar &&
-              < Search />
+              < Search 
+                handleClick = {onClickEvents.searchSelect}
+              />
             }
 
             {
@@ -254,14 +297,14 @@ console.log(userData.userHistory)
           <section id="home_second_sec">
       
               <div id="map_div">
-                <img onClick={onClickEvents.target} width='5%' src={targetIcon} id="target_icon"/> 
+                <img onClick={onClickEvents.target} src={targetIcon} id="target_icon"/> 
                 < MapComp 
                     dir = {dirToLocation.dir ? 'true': 'false'}
                     lat = {locationData.lat}
                     lng = {locationData.lng}
                     name = {locationData.name}
                     direction = {dirToLocation}
-                    phoneNavClick = {onClickEvents.phoneNav}
+
                 />
               </div>
           </section>

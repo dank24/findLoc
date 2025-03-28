@@ -54,6 +54,8 @@
     border: 1px solid black;
     position: relative;
 
+
+
     #topbarFirstDiv{
         @include disp($dir: row-reverse,);
         @include het($wid: 30%, $he: 100%);
@@ -103,7 +105,7 @@
         }
 
         #sec1_div2 {
-            height: 50%;
+            height: 40%;
             border: 1px solid rgb(240, 247, 240);
         }
     }
@@ -120,8 +122,12 @@
             #target_icon {
                 position: absolute;
                 z-index: 1;
-                bottom: 13%;
-                left: 65%;
+                bottom: 16%;
+                right: 1%;
+                background-color: rgb(13, 38, 71);
+                height: 40px;
+                width: 40px;
+                cursor: pointer;
             }
 
             
@@ -136,6 +142,7 @@
 
 .dropdown_p:hover {
     background-color: green;
+    cursor: pointer;
 }
 
 .divScroll{
@@ -144,7 +151,13 @@
 .divScroll::-webkit-scrollbar {
     display: none; /* Chrome, Safari, and Opera */
   }
-    
+.searchP:hover{
+    background-color: rgb(113, 209, 113);
+    cursor: pointer;
+}
+.homeImgs:hover{
+    cursor: pointer;
+}
 
 
 
@@ -165,8 +178,8 @@
 
                 #target_icon {
                     height: 5%;
-                    width: 15%;
-                    background-color: red;
+                    width: 150px;
+                    background-color: rgb(223, 140, 140);
                     position: absolute;
                     left: 80%;
                     top: 70%;
