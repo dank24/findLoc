@@ -38,14 +38,15 @@ const Search = (props) =>{
     },
 
     div: {
-      border: '1px solid red', height: '85%', width: '96%', gap: '1%',
+      height: '85%', width: '96%', gap: '0.5%',
       display: 'flex', flexDirection: 'column', marginTop: '1%',
-      backgroundColor: 'rgb(63, 59, 59)', alignItems: 'center'
+      backgroundColor: 'transparent', alignItems: 'center'
     },
 
     here: {
       height: '19%', width: '97%' ,border: '1px solid white', display: 'flex',
-      justifyContent: 'center', alignItems: 'center', color: 'white'
+      justifyContent: 'center', alignItems: 'center', color: 'white',
+      borderRadius: '5%'
     },
     
     hereP: {

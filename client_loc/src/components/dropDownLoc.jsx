@@ -21,10 +21,10 @@ const DropDownCard = (props) => {
 
     let siblingNode = es.target.previousElementSibling
 
-    let starClickString = 'http://localhost:5173/src/assets/images/icons/starClick.png'
-    let starDefString = 'http://localhost:5173/src/assets/images/icons/starDef.png'
+    let starClickString = 'http://localhost:5173/src/assets/images/icons/starClick.svg'
+    let starDefString = 'http://localhost:5173/src/assets/images/icons/starDef.svg'
 
-    let arr = ['DEP Of Anatomy', 'AE-FUNAI Solar Farm']
+    console.log(es.target.src)
 
     if(es.target.src == starDefString){
       let locText = siblingNode.innerHTML
@@ -61,7 +61,6 @@ const DropDownCard = (props) => {
           data: arr
         }
         updUserInfo(props.id, d)
-        updUserInfo(props.id, d)
         .then(resp => setFavesArray(resp.data.savedLocations))
       }
     } 
@@ -78,14 +77,15 @@ const DropDownCard = (props) => {
       name: e.target.innerHTML
     }
 
-    if(!userData.userHistory.some(its => its.name == e.target.innerHTML)){
-      let arr = [obj, ...userData.userHistory]
+    if(userData.userHistory.lenght >= 5){
+      userData.userHistory.pop()
     }
 
-    if(userData.userHistory.lenght > 5){
-      arr.pop()
-      console.log(arr)
+    let arr = []
+    if(!userData.userHistory.some(its => its.name == e.target.innerHTML)){
+      arr = [obj, ...userData.userHistory]
     }
+
     let sData = {
       name: 'history',
       data: arr
@@ -117,7 +117,7 @@ useEffect(() => {
     position: 'absolute',
     width: '85%',
     height: '60%',
-    backgroundColor: 'grey',
+    
     zIndex: '1',
     top: '10%',
     left: '10%',
@@ -146,7 +146,6 @@ useEffect(() => {
         width: '47%',
         height: '98%',
         overflow: 'hidden',
-        borderLeft: '1px solid white',
         borderBottom: '1px solid white',
         gap: '5%'
     },
@@ -157,7 +156,6 @@ useEffect(() => {
       width: '80%',
       height: '100%',
       overflow: 'hidden'
- 
     }
   }
 
@@ -176,7 +174,7 @@ useEffect(() => {
   let permSite = places.PermSite.map(its =>{
     return(
       <div style={style3.div}>
-        <p onClick={e => {props.handleClick; handlePClick(e)}} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
+        <p onClick={e => {props.handleClick(e); handlePClick(e)}} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
         <img id={`{"lat": "${its.lat}", "lng": "${its.lng}"}`} onClick={e =>handleClick(e, its.name)} className='imgs' height='100%' width='13%' />
       </div>
     ) 
@@ -184,7 +182,7 @@ useEffect(() => {
   let termSite = places.TempSite.map(its =>{
     return(
       <div style={style3.div}>
-        <p onClick={props.handleClick} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
+        <p onClick={e => {props.handleClick; handlePClick(e)}} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
         <img id={`{"lat": "${its.lat}", "lng": "${its.lng}"}`} onClick={e =>handleClick(e, its.name)} className='imgs' height='90%' width='10%' />
       </div>
     ) 
@@ -192,7 +190,7 @@ useEffect(() => {
   let lodges = places.lodges.map(its =>{
     return(
       <div style={style3.div}>
-        <p onClick={props.handleClick} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
+        <p onClick={e => {props.handleClick; handlePClick(e)}} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
         <img id={`{"lat": "${its.lat}", "lng": "${its.lng}"}`} onClick={e =>handleClick(e, its.name)} className='imgs' height='90%' width='10%' />
       </div>
     ) 
@@ -202,7 +200,7 @@ useEffect(() => {
 
   // UI
   return (
-    <main style={style} id='dropdown_card_main'>
+    <main className='cards' style={style} id='dropdown_card_main'>
 
       <section style={styles2.secs} id='dropdownCard_first_sec'>
           <div style={styles2.divs} id='1sec_1div'>

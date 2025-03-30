@@ -22,7 +22,7 @@ const LocationCard = (props) =>{
   // Styles
   let style = {
     main: {
-        width: '100%',
+        width: '98.7%',
         height: props.lenght,
     },
     div: {
@@ -32,7 +32,7 @@ const LocationCard = (props) =>{
         height: '100%',
         border: '1px solid white',
         borderRadius: '2%',
-        gap: '4%',
+        gap: '0%',
         alignItems: 'center'
     },
     img: {
@@ -40,7 +40,8 @@ const LocationCard = (props) =>{
         height: '90%'
     },
     h1: {
-        width: '90%'
+        width: '98%',
+        fontSize: '17px'
     }
   }
 
@@ -48,7 +49,7 @@ const LocationCard = (props) =>{
     let appendLoc = 
             <div key={props.name} onClick={e => {props.handleClick(props.name, props.lat, props.lng)}} style={style.div}>
                 <img style={style.img} src={mapIconDef} alt="an img"/>
-                <h3 id={props.name} style={style.h1}>{props.name}</h3>
+                <p id={props.name} style={style.h1}>{props.name}</p>
             </div>
 
 

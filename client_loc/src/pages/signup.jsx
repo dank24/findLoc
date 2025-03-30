@@ -1,5 +1,6 @@
 import react from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import '../assets/stylesheets/main.css'
 
@@ -8,6 +9,7 @@ import {createUserApi, saveToLocal} from '../utils/userUtils.js'
 const Signup = () =>{
 
   // Variables
+  const navigate = useNavigate()
     const [signUpData, setSignUpData] = useState({
         userName: '',
         userMail: '',
@@ -35,6 +37,11 @@ const Signup = () =>{
       console.log(dataS)
 
       createUserApi(dataS)
+      .then(resp => {
+        resp.status == 'success' ? 
+        navigate('/login') : 
+        console.log('failed')
+      })
     }
 
 
@@ -45,7 +52,7 @@ const Signup = () =>{
         <section id="signup_first_sec">
 
           <form>
-            <h2>Login</h2>
+            <h2>Signup</h2>
             <div>
               <input id="userName" placeholder="Enter Username" value={signUpData.userName} 
                   onChange={e => handleInput(e)}
@@ -59,13 +66,13 @@ const Signup = () =>{
             </div>
 
             <div>
-              <input id="userPass" placeholder="Enter Password" value={signUpData.userPass} 
+              <input type="password" id="userPass" placeholder="Enter Password" value={signUpData.userPass} 
                   onChange={e => handleInput(e)}
                 />
             </div>
 
             <div>
-              <input id="conPass" placeholder="Confirm Password" value={signUpData.conPass} 
+              <input type="password" id="conPass" placeholder="Confirm Password" value={signUpData.conPass} 
                   onChange={e => handleInput(e)}
                 />
             </div>

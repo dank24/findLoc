@@ -54,6 +54,11 @@ const Home = () => {
     profile: false
   })
 
+  let clearUi = {
+    searchBar: false,
+    locations: false,
+    profile: false,
+  }
  
 
   //  Functions
@@ -74,11 +79,7 @@ const Home = () => {
         let id = e.target.id
 
         if(id == 'map' || id == 'sec1_div2' || id == 'mapDirections'){
-          let t = {
-            searchBar: false,
-            locations: false
-          }
-          setUiDisplay(t)
+          setUiDisplay(clearUi)
         }
         
       },
@@ -120,8 +121,11 @@ const Home = () => {
             destination: latLng,
             origin: userData.userLocation
           }
-
+          if(e.target.tagName == 'p'){
+            setUiDisplay(clearUi)
+          }
           setDirToLocation(obj2) 
+          
       },
       starClick: () => {
         console.log('fuck')
@@ -156,13 +160,15 @@ const Home = () => {
 
     //  get user data
     let userDataUpd = async () =>{
+      
       getUserdata(userId)
       .then(resp => {
-
-        setUserData(prev => (
-          {...prev, userfaves: resp.data.savedLocations, userHistory: resp.data.userHistory}
-        ))
-      
+        if(resp.status == 'OK'){
+          setUserData(prev => (
+            {...prev, userfaves: resp.data.data.savedLocations, userHistory: resp.data.data.userHistory}
+          ))
+        }
+        console.log(resp)
 
       })
     }
@@ -202,7 +208,7 @@ console.log(userData.userHistory)
       < LocationCard 
         name = {its.name}
         key = {its.name}
-        lenght = '20%'
+        lenght = '25%'
         lat =  {its.lat}
         lng =  {its.lng}
         handleClick = {handleSideBar}
@@ -218,8 +224,9 @@ console.log(userData.userHistory)
       
   // UseEffects
     useEffect(() =>{
+      
       getUserLocation()
-     //userDataUpd()
+      userDataUpd()
     }, [])
     
 
@@ -253,11 +260,14 @@ console.log(userData.userHistory)
 
       </div>
 
-      <main onClick={e => onClickEvents.mainSec(e)} style={{}} id="home_main_cont">
+      <main onClick={e => onClickEvents.mainSec(e)} id="home_main_cont">
 
             {
               uiDisplay.profile &&
-              < ProfileMenu />
+              < ProfileMenu
+                userEmail = {userData.userEmail}
+                  userName = {userData.userName}
+              />
             }
 
             {

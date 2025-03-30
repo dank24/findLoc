@@ -1,6 +1,7 @@
 //  Create A New User and Save To Db
 export const createUserApi = async (dataS) => {
-    let api =  fetch('http://localhost:5378/user/createUser', {
+    let s;
+    let api =  await fetch('http://localhost:5378/user/createUser', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
@@ -9,8 +10,9 @@ export const createUserApi = async (dataS) => {
         body: JSON.stringify(dataS)
     })
     .then(resp => resp.json())
-    .then(data => console.log(data))
+    .then(data => s = data)
     .catch(error => console.error(error))
+    return s
 }
 
 //  Login a User
@@ -51,10 +53,9 @@ export const updUserInfo = async (id, sData) => {
     let api = await fetch(`http://localhost:5378/user/getuserdata/${id}`)
     .then(resp => resp.json())
     .then(data => {
-        s = data
-        return s
+        s = {status: 'OK', data: data}
     })
-    .catch(error =>  console.error(error))
+    .catch(error => s =  {status: 'Failure', data: error})
     return (s)
  }
 

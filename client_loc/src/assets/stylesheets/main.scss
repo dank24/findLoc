@@ -22,25 +22,49 @@
 
 #signup_main_cont {
     @include disp($he: 100vh, $wid: 100vw);
-    background-color: red;
+    background-image: url('../images/bgi/bgi1.svg');
+    background-repeat: no-repeat;    
+    background-size: cover;
 
     #signup_first_sec {
         @include disp($he: 100%, $wid: 45%, $dir: column, $ai: center, $jc: center);
-        background-color: black;
  
         form{
             @include disp($dir: column, $wid: 90%, $he: 70%, $ai: center, $jc: center);
             border: 1px solid green;
+            border-radius: 1rem;
             gap: 2%;
+            background-color: rgb(133, 151, 255);
 
             div {
                 width: 85%;
                 height: 10%;     
                 
                 input {
-                    height: 100%;
+                    font-family: cursive;
+                    height: 95%;
                     width: 100%;
+                    font-size: 18px;
+                    outline: none;
+                    border: 1px solid black;
+                    border-radius: 1rem;
+                    background-color: #a0d4bc;
                 }
+            }
+
+            button {
+                background-color: #1c3ca5;
+                font-size: 14px;
+                width: 25%;
+                height: 7%;
+                position: relative;
+                left: 30%;
+                border-radius: 1rem;
+                cursor: pointer;
+                box-shadow: 3px 3px;
+            }
+            button:hover{
+                outline-color: rgb(8, 8, 8);
             }
 
         }
@@ -105,7 +129,7 @@
         }
 
         #sec1_div2 {
-            height: 40%;
+            height: 33%;
             border: 1px solid rgb(240, 247, 240);
         }
     }
@@ -151,14 +175,47 @@
 .divScroll::-webkit-scrollbar {
     display: none; /* Chrome, Safari, and Opera */
   }
+.searchP{
+    background-color: rgb(16, 39, 33);
+}
 .searchP:hover{
-    background-color: rgb(113, 209, 113);
+    background-color: rgb(10, 10, 10);
     cursor: pointer;
 }
 .homeImgs:hover{
     cursor: pointer;
 }
+.container {
+    z-index: 1;
+    top: 3%;
+    right: 9%;
+    width: 80%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: absolute;
+}
+.contact-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 30px;
+}
 
+.contact-btn:hover {
+    background-color: #0056b3;
+}
+#mapDirections::-webkit-scrollbar{
+    display: none;
+}
+.cards{
+    background-color: rgb(57, 78, 92);
+    color: white;
+}
 
 
 @media (max-width: 500px) {
