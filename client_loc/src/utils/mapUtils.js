@@ -18,6 +18,7 @@ export const direction = async (ref, deLat, deLng, map) => {
   directionService.route(req, (result, status) => {
     console.log(result)
     if(status == "OK"){
+      console.log(result)
       directionsRenderer.setDirections(result)
     }
   })

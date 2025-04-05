@@ -50,6 +50,11 @@
   border-radius: 1rem;
   background-color: #a0d4bc;
 }
+#signup_main_cont #signup_first_sec form p {
+  border: 1px solid green;
+  padding: 10px;
+  background-color: black;
+}
 #signup_main_cont #signup_first_sec form button {
   background-color: #1c3ca5;
   font-size: 14px;
@@ -244,11 +249,12 @@
   #mainCont {
     display: flex;
     height: 100dvh;
-    width: 100%;
+    width: 100dvw;
     flex-direction: row;
     align-items: 0;
     justify-content: 0;
     overflow: hidden;
+    background-color: green;
   }
   #mainCont #home_first_sec {
     display: none;
@@ -256,13 +262,14 @@
   #mainCont #home_second_sec {
     display: flex;
     height: 100vh;
-    width: 100%;
+    width: 100vw;
     flex-direction: row;
     align-items: 0;
     justify-content: center;
   }
   #mainCont #home_second_sec #map_div {
     height: 90%;
+    width: 100%;
   }
   #mainCont #home_second_sec #map_div #target_icon {
     height: 5%;

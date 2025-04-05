@@ -9,8 +9,16 @@ import {createUserApi, saveToLocal} from '../utils/userUtils.js'
 const Signup = () =>{
 
   // Variables
+
   const navigate = useNavigate()
-    const [signUpData, setSignUpData] = useState({
+
+  const [errMsgs, setErrMsgs] = useState({
+    userName: ['Username too short', 'username not available', ],
+    userEmail: ['invalid email address', ''],
+    userPass: ['password word should be in the form'],
+    userconPass: 'passwords do not match',
+  })
+  const [signUpData, setSignUpData] = useState({
         userName: '',
         userMail: '',
         userPass: '',
@@ -64,6 +72,8 @@ const Signup = () =>{
                   onChange={e => handleInput(e)}
                 />
             </div>
+            <p>{errMsgs.userEmail[0]}</p>
+
 
             <div>
               <input type="password" id="userPass" placeholder="Enter Password" value={signUpData.userPass} 

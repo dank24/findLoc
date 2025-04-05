@@ -52,6 +52,12 @@
                 }
             }
 
+            p {
+                border: 1px solid green;
+                padding: 10px;
+                background-color: black;
+            }
+
             button {
                 background-color: #1c3ca5;
                 font-size: 14px;
@@ -220,18 +226,21 @@
 
 @media (max-width: 500px) {
     #mainCont {
-        @include disp($he: 100dvh);
+         @include disp($he: 100dvh, $wid: 100dvw); 
         overflow: hidden;
+        background-color: green;
+
 
         #home_first_sec {
             display: none;
         }
 
         #home_second_sec {
-            @include disp($wid: 100%, $he:100vh, $disp: flex, $jc: center);
+            @include disp($wid: 100vw, $he:100vh, $disp: flex, $jc: center);
 
             #map_div{
                 height: 90%;
+                width: 100%;
 
                 #target_icon {
                     height: 5%;
