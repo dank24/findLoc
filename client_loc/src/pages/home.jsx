@@ -260,7 +260,7 @@ console.log(userData.userHistory)
 
       </div>
 
-      <main onClick={e => onClickEvents.mainSec(e)} id="home_main_cont">
+      <main disabled={true} onClick={e => onClickEvents.mainSec(e)} id="home_main_cont">
 
             {
               uiDisplay.profile &&

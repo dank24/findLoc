@@ -33,7 +33,7 @@
   justify-content: center;
   border: 1px solid green;
   border-radius: 1rem;
-  gap: 2%;
+  gap: 1%;
   background-color: rgb(133, 151, 255);
 }
 #signup_main_cont #signup_first_sec form div {
@@ -46,14 +46,15 @@
   width: 100%;
   font-size: 18px;
   outline: none;
-  border: 1px solid black;
+  border: 1px solid rgb(39, 37, 37);
   border-radius: 1rem;
   background-color: #a0d4bc;
 }
 #signup_main_cont #signup_first_sec form p {
-  border: 1px solid green;
-  padding: 10px;
-  background-color: black;
+  border: 1px solid red;
+  width: 80%;
+  text-align: center;
+  border-radius: 0.3rem;
 }
 #signup_main_cont #signup_first_sec form button {
   background-color: #1c3ca5;

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import '../assets/stylesheets/main.css'
 
 import {createUserApi, saveToLocal} from '../utils/userUtils.js'
+import bcrypt from 'bcryptjs'
 
 const Signup = () =>{
 
@@ -18,6 +19,18 @@ const Signup = () =>{
     userPass: ['password word should be in the form'],
     userconPass: 'passwords do not match',
   })
+  const [checkValid, setCheckValid] = useState({
+    validUsername: false,
+    validEmail: false,
+    validPassword: false,
+    validConPass: true,
+  })
+  const [encPass, setEncPass] = useState({
+    basePass: '',
+    salt: '',
+    hashedPass: ''
+  })
+
   const [signUpData, setSignUpData] = useState({
         userName: '',
         userMail: '',
@@ -32,26 +45,84 @@ const Signup = () =>{
     function handleInput(e) {
       let {id, value} = e.target
 
-      setSignUpData(prev => {
-        return { ...prev, [id]: value }
-      })
+      if(id == 'userPass'){
+        setEncPass(prev => (
+          {...prev, basePass: value}
+        ))
+
+      } else {
+        setSignUpData(prev => {
+          return { ...prev, [id]: value }
+        })  
+      }
 
     }
 
     //  handle button click function
     function handleBtn(e) {
       e.preventDefault()
-      let dataS = signUpData
+      let dataS = {
+        ...signUpData,
+        salt: encPass.salt
+      }
       console.log(dataS)
 
-      createUserApi(dataS)
-      .then(resp => {
-        resp.status == 'success' ? 
-        navigate('/login') : 
-        console.log('failed')
-      })
+      if(checkValid.validConPass){
+        createUserApi(dataS)
+        .then(resp => {
+          resp.status == 'success' ? 
+          navigate('/login') : 
+          console.log('failed')
+        }) 
+      } else {
+        console.log('error')
+      }
+
     }
 
+    //  encrypt pass functions
+    async function encryptPass(){
+
+      try {
+        let newSalt = await bcrypt.genSalt(10)
+        setEncPass(prev => (
+          {...prev, salt: newSalt}
+        ))
+        
+        let hashedPass = await bcrypt.hash(encPass.basePass, newSalt)
+
+        setSignUpData(prev => (
+          {...prev, userPass: hashedPass}
+        ))
+
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
+
+    //  check valid
+    function valid(pass, conpass) {
+      if(pass !== conpass){
+        setCheckValid(prev => (
+          {...prev, validConPass: false}
+        ))
+      } else if(pass === conpass){
+        setCheckValid(prev => (
+          {...prev, validConPass: true}
+        ))
+      }
+    }
+
+
+    //  use Effects
+    useEffect(() =>{
+      encryptPass()
+    }, [encPass.basePass])
+
+    useEffect(() =>{
+      valid(encPass.basePass, signUpData.conPass)
+    }, [encPass.basePass, signUpData.conPass])
 
   // UI
   return( 
@@ -72,11 +143,13 @@ const Signup = () =>{
                   onChange={e => handleInput(e)}
                 />
             </div>
-            <p>{errMsgs.userEmail[0]}</p>
+            {
+             checkValid.validEmail && <p>{errMsgs.userEmail[0]}</p>
+            }
 
 
             <div>
-              <input type="password" id="userPass" placeholder="Enter Password" value={signUpData.userPass} 
+              <input type="password" id="userPass" placeholder="Enter Password" value={encPass.basePass} 
                   onChange={e => handleInput(e)}
                 />
             </div>
@@ -86,8 +159,11 @@ const Signup = () =>{
                   onChange={e => handleInput(e)}
                 />
             </div>
+            {
+              !checkValid.validConPass && <p>{errMsgs.userconPass}</p>
+            }
 
-            <button onClick={e => handleBtn(e)}>
+            <button onInvalid={console.log('ib')} disabled={!checkValid.validConPass ? true : false} onClick={e => handleBtn(e)}>
               Signup
             </button>
 
