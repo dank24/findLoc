@@ -1,9 +1,10 @@
 const usermodel = require('../models/userModel')
 const asyncHandler = require('express-async-handler')
+const bcrypt = require('bcryptjs')
 
 exports.createUser = asyncHandler(
     async(req, res, next) => {
-        let {userName, userMail, userPass, conPass} = await req.body
+        let {userName, userMail, userPass, salt} = await req.body
             let name = userName.toLowerCase()
             let mail = userMail.toLowerCase()
         console.log(name, mail)
@@ -19,6 +20,8 @@ exports.createUser = asyncHandler(
                 let newUser = new usermodel({
                     userName: name,
                     userEmail: mail,
+                    userPass: userPass,
+                    salt: salt,
                     savedLocations: [],
                     userHistory: [],
                 })
@@ -38,18 +41,26 @@ exports.createUser = asyncHandler(
 exports.login = asyncHandler(
     async(req, res, next)=> {
         
-        let userName = req.params.userName
+        let {userName, userPass} = await JSON.parse(req.params.logindata)
+        console.log(userName, userPass)
 
             let name = userName.toLowerCase()
             //let mail = userMail.toLowerCase()
         let user = await usermodel.findOne({userName: name}) 
 
+        let isValidPass = await bcrypt.compare(userPass, user.userPass)
+        console.log(isValidPass)
+
         try {
-            if(user){
+            if(user && isValidPass){
+                
                 return res.status(200).json({message: 'user found', action: 'logged in', status: 'success', data: user})
             }
             if(!user){
                 return res.status(400).json({message: 'user not found', action: 'not logged in', status: 'failure'})
+            }
+            if(!isValidPass){
+                res.status(401).json({message: 'invalid credential', status: 'failure', action: 'data incorrect'})
             }
 
         } catch (error) {

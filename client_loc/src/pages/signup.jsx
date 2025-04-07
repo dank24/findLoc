@@ -1,6 +1,6 @@
-import react from "react";
+import react, { use } from "react";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useRouteLoaderData } from "react-router-dom";
 
 import '../assets/stylesheets/main.css'
 
@@ -24,6 +24,7 @@ const Signup = () =>{
     validEmail: false,
     validPassword: false,
     validConPass: true,
+    validbtn: false
   })
   const [encPass, setEncPass] = useState({
     basePass: '',
@@ -121,7 +122,8 @@ const Signup = () =>{
     }, [encPass.basePass])
 
     useEffect(() =>{
-      valid(encPass.basePass, signUpData.conPass)
+      valid(encPass.basePass, signUpData.conPass);
+
     }, [encPass.basePass, signUpData.conPass])
 
   // UI
@@ -163,7 +165,7 @@ const Signup = () =>{
               !checkValid.validConPass && <p>{errMsgs.userconPass}</p>
             }
 
-            <button onInvalid={console.log('ib')} disabled={!checkValid.validConPass ? true : false} onClick={e => handleBtn(e)}>
+            <button disabled={!checkValid.validConPass} onClick={e => handleBtn(e)}>
               Signup
             </button>
 

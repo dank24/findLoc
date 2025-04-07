@@ -30,6 +30,9 @@ const handleInput = (e) =>{
 const handleBtn = (e) =>{
     e.preventDefault()
     
+    console.log(userData)
+
+
     let l = login(userData)
     .then(data => {
         if(data.status == 'success'){

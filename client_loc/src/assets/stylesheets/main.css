@@ -70,6 +70,9 @@
 #signup_main_cont #signup_first_sec form button:hover {
   outline-color: rgb(8, 8, 8);
 }
+#signup_main_cont #signup_first_sec form button:disabled {
+  cursor: not-allowed;
+}
 
 #topBar {
   display: flex;
@@ -244,6 +247,71 @@
 .cards {
   background-color: rgb(57, 78, 92);
   color: white;
+}
+
+#admin_main_cont {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  flex-direction: row;
+  align-items: 0;
+  justify-content: 0;
+  background-color: rgb(59, 58, 58);
+}
+#admin_main_cont #admin_first_sec {
+  height: 99.7%;
+  width: 30%;
+  background-color: rgb(14, 12, 12);
+  border: 1px solid black;
+  border-radius: 2%;
+  overflow: hidden;
+}
+#admin_main_cont #admin_first_sec #sec1_div1 {
+  border: 1px solid gold;
+  height: 8%;
+  font-size: 30px;
+  text-align: center;
+}
+#admin_main_cont #admin_first_sec #sec1_div2 {
+  display: flex;
+  height: 92%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: 0;
+  color: white;
+}
+#admin_main_cont #admin_first_sec #sec1_div2 h3 {
+  display: flex;
+  height: 6%;
+  width: 98%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: 0;
+  margin-top: 1%;
+  text-align: justify;
+}
+#admin_main_cont #admin_first_sec #sec1_div2 h3:hover {
+  background-color: #fff;
+  color: black;
+  cursor: pointer;
+}
+#admin_main_cont #admin_second_sec {
+  height: 100%;
+  width: 70%;
+  background-color: "blue";
+}
+#admin_main_cont #admin_second_sec #sec2_div1 {
+  display: flex;
+  height: 55%;
+  width: 80%;
+  flex-direction: column;
+  align-items: 0;
+  justify-content: 0;
+  background-color: rgb(95, 77, 77);
+  position: relative;
+  top: 2%;
+  left: 10%;
 }
 
 @media (max-width: 500px) {

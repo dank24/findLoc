@@ -17,8 +17,9 @@ export const createUserApi = async (dataS) => {
 
 //  Login a User
 export const login = async (dataS) => {
+    let r = JSON.stringify(dataS)
     let s;
-    let api = await fetch(`http://localhost:5378/user/login/${dataS.userName}`)
+    let api = await fetch(`http://localhost:5378/user/login/${r}`)
     .then(resp => resp.json())
     .then(data => {
         s = data

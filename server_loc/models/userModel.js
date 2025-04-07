@@ -18,6 +18,10 @@ const userSchema = schema({
     },
     userPass: {
         type: String,
+        required: true
+    },
+    salt: {
+        type: String
     },
     savedLocations: {
         type: Array
