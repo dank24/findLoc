@@ -7,6 +7,7 @@ const process = require('process')
 const app = express()
 
   //  Routes 
+const dataRoute = require('./routes/dataRoutes')
 const userRoute = require('./routes/userRoutes')
 
   // Use Middleware
@@ -18,6 +19,8 @@ app.use(cors({
 
   // Use Routes
 app.use('/user', userRoute)
+app.use('/data', dataRoute)
+
 
 
 const Port = 5378
