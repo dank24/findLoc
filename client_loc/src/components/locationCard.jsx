@@ -47,7 +47,7 @@ const LocationCard = (props) =>{
 
   // Attach
     let appendLoc = 
-            <div key={props.name} onClick={e => {props.handleClick(props.name, props.lat, props.lng)}} style={style.div}>
+            <div key={props.name} onClick={e => {props.handleClick(e, props.name, props.lat, props.lng)}} style={style.div}>
                 <img style={style.img} src={mapIconDef} alt="an img"/>
                 <p id={props.name} style={style.h1}>{props.name}</p>
             </div>

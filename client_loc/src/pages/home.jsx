@@ -63,32 +63,32 @@ const Home = () => {
 
   //  Functions
     // get location data function
-    function handleSideBar(n, l , ln) {
-      let obj = {name: n, lat: l, lng: ln}
+    function handleSideBar(e, n, l , ln) {
+       let obj = {name: n, lat: l, lng: ln}
       let obj2 = {
         dir: true,
         destination: obj,
         origin: userData.userDynamicLoc
       }
-      setDirToLocation(obj2)
+      setDirToLocation(obj2) 
+
     }
 
     // onClick event functions
     const onClickEvents = {
       mainSec: (e) => {
-        let id = e.target.id
+        setUiDisplay(clearUi)
 
-        if(id == 'map' || id == 'sec1_div2' || id == 'mapDirections'){
-          setUiDisplay(clearUi)
-        }
-        
       },
       profile: () => {
+           setUiDisplay(clearUi)
           setUiDisplay(prev => (
             {...prev, profile: !uiDisplay.profile}
           ))
       },
       search: () => {
+          setUiDisplay(clearUi)
+
           setUiDisplay(prev => (
           {...prev, searchBar: !uiDisplay.searchBar}
           )) 
@@ -104,6 +104,7 @@ const Home = () => {
 
       },
       location: () =>{
+          setUiDisplay(clearUi)
           setUiDisplay(prev => (
             {...prev, locations: !uiDisplay.locations}
           ))
@@ -114,17 +115,22 @@ const Home = () => {
           
       },
       dropdownPlaces: (e, s) =>{
+        if(e.target.id !== 'close_x'){
           let latLng = JSON.parse(e.target.id)
-
           let obj2 = {
             dir: true,
             destination: latLng,
             origin: userData.userLocation
           }
-          if(e.target.tagName == 'p'){
+          if(e.target.tagName == 'P'){
             setUiDisplay(clearUi)
           }
-          setDirToLocation(obj2) 
+          setDirToLocation(obj2)  
+        } else {
+          setUiDisplay(clearUi)
+        }
+          console.log(e.target.innerHTML)
+ 
           
       },
       starClick: () => {
@@ -234,7 +240,7 @@ console.log(userData.userHistory)
     return (
   <div id="mainCont">
 
-      <div id="topBar">
+    <div id="topBar">
 
         <div id="topbarFirstDiv">
           
@@ -256,16 +262,12 @@ console.log(userData.userHistory)
 
         </div>
 
+    </div>
 
-
-      </div>
-
-      <main disabled={true} onClick={e => onClickEvents.mainSec(e)} id="home_main_cont">
-
-            {
+    {
               uiDisplay.profile &&
               < ProfileMenu
-                userEmail = {userData.userEmail}
+                userEmgail = {userData.userEmail}
                   userName = {userData.userName}
               />
             }
@@ -287,6 +289,7 @@ console.log(userData.userHistory)
             }
 
 
+      <main disabled={true} onClick={e => onClickEvents.mainSec(e)} id="home_main_cont">
 
           <section id="home_first_sec">
 

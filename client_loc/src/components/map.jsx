@@ -38,7 +38,7 @@ const MapComp = (props) => {
         let attMarker = new AdvancedMarkerElement({
             map: attMap,
             position: position,
-            title: title
+            title: title,
         })
 
         console.log(props.direction.destination)
@@ -86,6 +86,8 @@ const MapComp = (props) => {
  useEffect(() =>{
     //initMap2(6.131973147874651, 8.141276842329257, "Funia")
     initMap2(mapLocData.lat, mapLocData.lng, mapLocData.name)
+    console.log(mapRef.current.id)
+
  }, [mapLocData])
 
 

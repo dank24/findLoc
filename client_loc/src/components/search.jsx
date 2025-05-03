@@ -26,15 +26,15 @@ const Search = (props) =>{
 
   // STyles
   const style = {
-    position: 'absolute', zIndex: '1', height: '50%',
+    position: 'absolute', zIndex: '1', height: 'fit-content',
     width:'35%', right: '4px', display: 'flex', flexDirection: 'column',
     alignItems: 'center', 
 
     input: {
-        height: '13%', width: '100%', borderRaduis: '8%',
+        height: '6vh', width: '100%', borderRaduis: '8%',
         border: '1px solid black', fontSize: '20px',
         textAlign: 'center', borderRadius: '10px', 
-        backgroundColor: 'white'
+        backgroundColor: 'white',marginTop: '3px'
     },
 
     div: {
@@ -50,7 +50,7 @@ const Search = (props) =>{
     },
     
     hereP: {
-      fontSize: '20px', width: '100%', height: '70%', display: 'flex',
+      fontSize: '20px', width: '100%', height: '65px', display: 'flex',
       justifyContent: 'center', alignItems: 'center', textAlign: 'center'
     }
   }

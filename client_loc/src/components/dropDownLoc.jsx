@@ -127,7 +127,12 @@ useEffect(() => {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: '2%'
+    gap: '2%',
+
+    close: {
+      color: 'red', position: 'absolute', right: '4%',
+      top: '1%', cursor: 'pointer'
+    }
   }
 
   let styles2 = {
@@ -200,9 +205,12 @@ useEffect(() => {
 
   // UI
   return (
-    <main className='cards' style={style} id='dropdown_card_main'>
+    <main className='cards ignore' style={style} id='dropdown_card_main'>
 
-      <section style={styles2.secs} id='dropdownCard_first_sec'>
+
+    <h1 id='close_x' onClick={e => props.handleClick(e)} style={style.close}>X</h1>
+
+      <section className='ignore' style={styles2.secs} id='dropdownCard_first_sec'>
           <div style={styles2.divs} id='1sec_1div'>
 
             <h3 style={{marginLeft: '2%', }}>Perm Site</h3>
@@ -227,7 +235,7 @@ useEffect(() => {
           </div>
       </section>
 
-      <section style={styles2.secs} id='dropdownCard_second_sec'>
+      <section className='ignore' style={styles2.secs} id='dropdownCard_second_sec'>
 
           <div style={styles2.divs} id='2sec_1div'>
               
