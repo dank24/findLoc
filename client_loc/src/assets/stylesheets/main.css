@@ -76,7 +76,7 @@
 
 #topBar {
   display: flex;
-  height: 6vh;
+  height: 5.5vh;
   width: 100vw;
   flex-direction: row-reverse;
   align-items: 0;
@@ -111,12 +111,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 39px;
-  width: 39px;
+  height: 100%;
+  width: 20%;
   background-color: rgb(113, 113, 182);
   display: flex;
-  text-align: center;
-  font-size: 200%;
+  font-size: 46px;
   border: 1px solid rgb(39, 27, 27);
   border-radius: 50%;
 }
@@ -130,7 +129,7 @@
 
 #home_main_cont {
   display: flex;
-  height: 94vh;
+  height: 94.5vh;
   width: 100vw;
   flex-direction: row;
   align-items: 0;

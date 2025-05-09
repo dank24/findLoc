@@ -83,7 +83,7 @@
 }
 
 #topBar {
-    @include disp($he: 6vh, $wid: 100vw, $dir: row-reverse, $disp: flex);
+    @include disp($he: 5.5vh, $wid: 100vw, $dir: row-reverse, $disp: flex);
     background-color: rgb(65, 70, 69);
     border: 1px solid black;
     position: relative;
@@ -103,10 +103,9 @@
         }
         .p_div{
             @include disp($jc: center, $ai: center );
-            @include het($he: 39px, $wid: 39px, $bgc: rgb(113, 113, 182) );
+            @include het($he: 100%, $wid: 20%, $bgc: rgb(113, 113, 182) );
             display: flex;
-            text-align: center;
-            font-size: 200%;
+            font-size: 46px;
             border: 1px solid rgb(39, 27, 27);
             border-radius: 50%;
         }
@@ -124,7 +123,7 @@
 }
 
 #home_main_cont {
-    @include disp($he: 94vh, $wid: 100vw, $dir: row);
+    @include disp($he: 94.5vh, $wid: 100vw, $dir: row);
     overflow: hidden;
 
     #home_first_sec{

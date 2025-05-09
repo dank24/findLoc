@@ -245,7 +245,7 @@ console.log(userData.userHistory)
         <div id="topbarFirstDiv">
           
           <div onClick={onClickEvents.profile} className="p_div">
-            <p className="homeImgs" style={{textAlign: 'center'}}>s</p> 
+            <p className="homeImgs" >S</p> 
           </div>
 
           <div onClick={onClickEvents.search} className="image_div">
