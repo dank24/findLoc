@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 const schema = mongoose.Schema
 
-const newDataSchema = new schema({
+const newDataSchema = schema({
     category: {
         type: String
     },

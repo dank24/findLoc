@@ -37,6 +37,7 @@ const handleBtn = (e) =>{
     .then(data => {
         if(data.status == 'success'){
             let userId = data.data._id
+            localStorage.setItem('id', userId)
             navigate(`/home/${userId}`)
         }
         if(data.status == 'failure'){

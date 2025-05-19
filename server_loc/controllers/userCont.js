@@ -1,6 +1,7 @@
 const usermodel = require('../models/userModel')
 const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcryptjs')
+const { use } = require('../routes/dataRoutes')
 
 exports.createUser = asyncHandler(
     async(req, res, next) => {
@@ -73,32 +74,64 @@ exports.login = asyncHandler(
 
 exports.updUserInfo = asyncHandler(
     async(req, res, next) => {
-        let userId = await req.params.userId
+        let userId = req.params.userId
         let rData = await req.body
-        console.log(rData)
-        console.log(userId)
-        
-        let user = await usermodel.findOne({_id: userId})
-        console.log(user)
 
-        try {
-            if(rData.name == 'faves'){
+        function handleFave(lis, datrm){
+            let check = lis.some(it => it === datrm)
+            if(check){
+                let i = lis.findIndex(it => it === datrm)
+                lis.splice(i, 1)
+
+                return lis
+            } else {
+                lis.push(datrm)
+                return lis
+            }
+        }
+        function handleHistory(arr, data){
+
+            let useArr;
+            let check = arr.some(it => it.name === data.name)
+            if(check){
+                let i = arr.findIndex(it => it.name === data.name)
+                arr.splice(i, 1)
+
+                useArr = [data, ...arr]
+                useArr = useArr.splice(0, 4)
+            } else {
+                useArr = [data, ...arr]
+                useArr = useArr.splice(0, 4)
+            }
+            return useArr
+        }
+
+         let user = await usermodel.findOne({_id: userId})
+
+         try {
+            if(rData.name == 'faves' && user){
+                let userFaves = user.savedLocations
+                let useArr = handleFave(userFaves, rData.data)
+
                 await usermodel.updateOne({_id: userId},
-                {$set: {savedLocations: rData.data}}
+                {$set: {savedLocations: useArr}}
                 )      
                 return res.status(200).json({message: 'favorites updated', status: 'success', data: user})
             }
 
-            if(rData.name == 'history'){
-                //let updData = user.userHistory.push(r)
+            if(rData.name == 'history' && user){
+                let userHistory = user.userHistory
+                let useArr = handleHistory(userHistory, rData.data)
+
+                console.log(useArr)
                 await usermodel.updateOne({_id: userId},
-                    {$set: {userHistory: rData.data}}
+                    {$set: {userHistory: useArr}}
                 )
                 return res.status(200).json({message: 'history updated', status: 'success'})
             }
         } catch (error) {
             return res.status(400).json({message: error.message, action: 'error', status: 'error'})
-        }
+        }  
         
     }
 )
@@ -119,7 +152,7 @@ exports.getUserData = asyncHandler(
                 }
                 return res.status(200).json({message: 'user found', data: sData, status: 'success'})
             }
-            if(!user){
+             if(!user){
                 return res.status(400).json({message: 'user not found', status: 'failure'})
             }
         } catch (error) {
@@ -127,3 +160,4 @@ exports.getUserData = asyncHandler(
         }
     }
 )
+

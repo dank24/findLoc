@@ -347,3 +347,12 @@
 
 
 }
+
+/* @mixin disp($he: 100%, $wid: 100%, $disp: flex, $dir: row, $ai: 0, $jc: 0) {
+ */
+
+#overview_main_cont{
+    @include disp(100px, 180px, flex, column, center, center );
+    border: 1px solid red;
+    gap: 2%; 
+}

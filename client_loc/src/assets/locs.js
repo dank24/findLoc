@@ -17,6 +17,10 @@ export const locations = [
 ]
 
 export const places = {
+    specia: [
+        
+    ],
+
     lodges: [
         {
             name: 'Uncle Sam\'s Lodge',

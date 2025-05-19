@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 
-import { places } from '../assets/locs'
+import { places } from '../assets/locs2'
 import starClick from '../assets/images/icons/starClick.svg'
 import starDef from '../assets/images/icons/starDef.svg'
 
 import { updUserInfo, getUserdata } from '../utils/userUtils'
+import { userContext } from '../context/userContext'
 
 
 const DropDownCard = (props) => {
 
+
+  const {userData2, reGetUData} = useContext(userContext)
   //Variables
 
   let userData = props.data
-  console.log(userData.userfaves)
   const [imgClicked, setImgClicked] = useState(false)
-  let [favesArray, setFavesArray] = useState(userData.userfaves)
+  let [favesArray, setFavesArray] = useState(userData2.savedLocations)
 
   const handleClick = (es,) =>{
 
@@ -29,69 +31,48 @@ const DropDownCard = (props) => {
     if(es.target.src == starDefString){
       let locText = siblingNode.innerHTML
       es.target.src = starClick
-      addToList(userData.userfaves, locText )
+
+      let obj = {
+        name: 'faves',
+        data: locText
+      }
+      updUserInfo(props.id, obj)
+      
     }
     else {
-      es.target.src = starDef
       let locText = siblingNode.innerHTML
-      rmFromList(userData.userfaves, locText)
-    }
+      es.target.src = starDef
 
-    function rmFromList(arr, itR){
-      if(arr.some(its => its === itR)){
-        let i = arr.findIndex(it =>  it == itR)
-        arr.splice(i, 1)
-        
-        let d = {
-          name: 'faves',
-          data: arr
-        }
-        updUserInfo(props.id, d)
-        .then(resp => setFavesArray(resp.data.savedLocations))
+      let obj = {
+        name: 'faves',
+        data: locText
       }
+      updUserInfo(props.id, obj)
     }
 
 
-    function addToList(arr, itA){
-      if(!arr.some(it => it === itA)){
-        arr.push(itA)
-        
-        let d = {
-          name: 'faves',
-          data: arr
-        }
-        updUserInfo(props.id, d)
-        .then(resp => setFavesArray(resp.data.savedLocations))
-      }
-    } 
 
     props.handleClick(es)
 
 
   }
 
-  const handlePClick = (e) => {
+  const handlePClick = async (e) => {
     let locData = JSON.parse(e.target.id)
+    let name = e.target.innerHTML
+
     let obj = {
-      ...locData,
-      name: e.target.innerHTML
-    }
-
-    if(userData.userHistory.lenght >= 5){
-      userData.userHistory.pop()
-    }
-
-    let arr = []
-    if(!userData.userHistory.some(its => its.name == e.target.innerHTML)){
-      arr = [obj, ...userData.userHistory]
-    }
-
-    let sData = {
       name: 'history',
-      data: arr
+      data: {
+        name,
+        ...locData
+      }
     }
 
-    updUserInfo(props.id, sData )
+   
+   updUserInfo(props.id, obj)
+   .then(r => reGetUData())
+
   }
 
   // useEffect
@@ -120,7 +101,7 @@ useEffect(() => {
     
     zIndex: '1',
     top: '10%',
-    left: '10%',
+    left: '8%',
     border: '1px solid white',
     borderRadius: '4%',
     display: 'flex', 
@@ -160,7 +141,9 @@ useEffect(() => {
       padding: '2px',
       width: '80%',
       height: '100%',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      display: 'flex',
+      alignItems: 'center'
     }
   }
 
@@ -171,7 +154,6 @@ useEffect(() => {
       flexDirection: 'row',
       overflow: 'hidden',
       borderBottom: '1px solid rgba(157, 175, 200, 0.534)',
-
     }
   }
 
@@ -187,7 +169,7 @@ useEffect(() => {
   let termSite = places.TempSite.map(its =>{
     return(
       <div style={style3.div}>
-        <p onClick={e => {props.handleClick; handlePClick(e)}} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
+        <p onClick={e => {props.handleClick(e); handlePClick(e)}} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
         <img id={`{"lat": "${its.lat}", "lng": "${its.lng}"}`} onClick={e =>handleClick(e, its.name)} className='imgs' height='90%' width='10%' />
       </div>
     ) 
@@ -195,7 +177,15 @@ useEffect(() => {
   let lodges = places.lodges.map(its =>{
     return(
       <div style={style3.div}>
-        <p onClick={e => {props.handleClick; handlePClick(e)}} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
+        <p onClick={e => {props.handleClick(e); handlePClick(e)}} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
+        <img id={`{"lat": "${its.lat}", "lng": "${its.lng}"}`} onClick={e =>handleClick(e, its.name)} className='imgs' height='90%' width='10%' />
+      </div>
+    ) 
+  })
+  let admin = places.admin.map(its =>{
+    return(
+      <div style={style3.div}>
+        <p onClick={e => {props.handleClick(e); handlePClick(e)}} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
         <img id={`{"lat": "${its.lat}", "lng": "${its.lng}"}`} onClick={e =>handleClick(e, its.name)} className='imgs' height='90%' width='10%' />
       </div>
     ) 
@@ -239,7 +229,7 @@ useEffect(() => {
 
           <div style={styles2.divs} id='2sec_1div'>
               
-              <h3 style={{marginLeft: '2%', }}>Lodges Site</h3>
+              <h3 style={{marginLeft: '2%', }}>Lodges</h3>
 
               <div className='divScroll' style={{marginLeft: '4%', border: '1px solid rgba(157, 175, 175, 0.534)', height: '85%',}}>
                 
@@ -249,8 +239,12 @@ useEffect(() => {
           </div>
 
           <div className='divScroll' style={styles2.divs} id='2sec_2div'>
-              <h3 style={{marginLeft: '2%', }}>Perm Site</h3>
-             
+              <h3 style={{marginLeft: '2%', }}>Administration</h3>
+              <div className='divScroll' style={{marginLeft: '4%', border: '1px solid rgba(157, 175, 175, 0.534)', height: '85%',}}>
+                
+                {admin}
+                
+            </div>
           </div>
       </section>
 

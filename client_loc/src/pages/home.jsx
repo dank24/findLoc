@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams, useLocation} from "react-router-dom";
 
 import '../assets/stylesheets/main.css'
@@ -18,8 +18,11 @@ import { getUserdata } from "../utils/userUtils";
 import DropDownCard from "../components/dropDownLoc";
 import ProfileMenu from "../components/profileMenu";
 
+import { userContext } from "../context/userContext";
+
 const Home = () => {
 
+  const {userData2} = useContext(userContext)
     //  Variables
 
   const location = useLocation()
@@ -198,18 +201,14 @@ const Home = () => {
 
 
 
-  console.log(userData)
-
   let p = {
     fontSize: '19px',
     padding: '2px',
     width: '85%'
   }
 
-console.log(userData.userHistory)
-
   // Appends
-  const sideBarLocations = userData.userHistory.map(its => {
+  const sideBarLocations = userData2.userHistory.map(its => {
     return (
       < LocationCard 
         name = {its.name}
@@ -232,7 +231,7 @@ console.log(userData.userHistory)
     useEffect(() =>{
       
       getUserLocation()
-      userDataUpd()
+      //userDataUpd()
     }, [])
     
 
@@ -244,7 +243,7 @@ console.log(userData.userHistory)
 
         <div id="topbarFirstDiv">
           
-          <div onClick={onClickEvents.profile} className="p_div">
+          <div onClick={onClickEvents.profile} className="p_div image_div">
             <p className="homeImgs" >S</p> 
           </div>
 

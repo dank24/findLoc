@@ -1,7 +1,8 @@
 import React, { use, useEffect, useState, useSyncExternalStore } from "react";
 import { useRef } from "react";
 
-import { uploadData } from "../utils/dataUtils";
+import { uploadData, storeLocal } from "../utils/dataUtils";
+import OverviewCard from "../components/overviewCard";
 
 const AdminDash = () => {
 // Variables
@@ -82,11 +83,10 @@ const AdminDash = () => {
         }
         if(pageData["lat/lng"] != '' && btnText == "Confirm") {
             //setCount(0)
-            uploadData(pageData)
+            //uploadData(pageData)
+            storeLocal(pageData)
             console.log('done')
-        }
-    
-        
+        }  
   }   
 
   function handleInput(e){
@@ -168,6 +168,12 @@ const AdminDash = () => {
         </section>
 
         <section id="admin_second_sec">
+
+            {
+                displayScreen['Overview'] &&
+                < OverviewCard />
+            }
+
             {
                 displayScreen['Add Locations'] &&
                 <div onClick={addLocation} id="sec2_div1">
@@ -184,7 +190,8 @@ const AdminDash = () => {
                                 <select onChange={handleSelect} style={style.type.child}>
                                     <option value='permsite'>PernSite</option>
                                     <option value='tempsite'>tempsite</option>
-                                    <option value='popular'>popular</option>
+                                    <option value='admin'>admin</option>
+                                    <option value='lodges'>lodges</option>
                                 </select>
                                 <div style={{...style.type.child}}>{typeData}</div>
                             </div>

@@ -44,7 +44,6 @@ export const updUserInfo = async (id, sData) => {
     .then(resp => resp.json())
     .then(data => {console.log(data); s = data})
     .catch(error => console.error(error)) 
-
     return s
 }
 

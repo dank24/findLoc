@@ -5,6 +5,7 @@
   font-family: fantasy;
 }
 
+
 #signup_main_cont {
   display: flex;
   height: 100vh;
@@ -312,6 +313,55 @@
   top: 2%;
   left: 10%;
 }
+#mapDirections {
+  position: absolute;
+  width: 35%;
+  height: 57%;
+  border-top: 3px solid rgb(10, 10, 10);
+  top: 43%;
+  left: 1px;
+  overflow: scroll;
+}
+
+@media (min-width: 1050px){
+  #mainCont {
+    background-color: rgb(24, 19, 19);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+
+  }
+
+  #topBar {
+    width: 61vw;
+    border-radius: 0.5rem;
+  }
+  #topBar #topbarFirstDiv .image_div{
+    width: 16%;
+  }
+
+  #target_icon{
+    position: static;
+    position: fixed;
+    left: 76vw;
+    top: 85vh;
+  }
+
+  #home_main_cont {
+    height: 94.5vh;
+    width: 60vw;
+  }
+  #mapDirections{
+      position: absolute;
+      width: 20.3%;
+      left: 20.3vw;
+
+  }
+}
+
 
 @media (max-width: 500px) {
   #mainCont {
@@ -377,6 +427,18 @@
   #topBar {
     display: none;
   }
+}
+/* @mixin disp($he: 100%, $wid: 100%, $disp: flex, $dir: row, $ai: 0, $jc: 0) {
+ */
+#overview_main_cont {
+  display: flex;
+  height: 100px;
+  width: 180px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid red;
+  gap: 2%;
 }
 
 /*# sourceMappingURL=main.css.map */

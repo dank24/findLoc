@@ -7,8 +7,8 @@ const process = require('process')
 const app = express()
 
   //  Routes 
-const dataRoute = require('./routes/dataRoutes')
 const userRoute = require('./routes/userRoutes')
+const dataRoute = require('./routes/dataRoutes')
 
   // Use Middleware
 app.use(express.json())
@@ -17,11 +17,11 @@ app.use(cors({
     method: ['PUT', "POST", 'GET']
 }))
 
-  // Use Routes
+   // Use Routes
 app.use('/user', userRoute)
 app.use('/data', dataRoute)
 
-
+ 
 
 const Port = 5378
 const mongoUrl = process.env.mongoUrl
@@ -32,7 +32,7 @@ app.listen(Port, () =>{
     console.log(`Server Started On Port: ${Port}`)
 })
 
-//  Start Database
+ //  Start Database
 mongoose.connect(mongoUrl).then(() => {
   console.log('DB Connected')
-}).catch(error => {console.error(error)})
+}).catch(error => {console.error(error)}) 

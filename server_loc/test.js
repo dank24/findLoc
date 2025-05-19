@@ -1,0 +1,1 @@
+{"category":"tempsite","name":"ds","lat":"33","lng":"3"}{"category":"tempsite","name":"ds","lat":"33","lng":"3"}{"category":"tempsite","name":"ds","lat":"33","lng":"3"}
