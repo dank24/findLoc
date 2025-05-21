@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { login } from "../utils/userUtils";
+import { userContext } from "../context/userContext";
 
 const Login = () =>{
+
+    const {setErrors, push: pushIntoErrors} = useContext(userContext)
 
   //  Variables
   const [userData, setUserData] = useState({
@@ -41,9 +44,11 @@ const handleBtn = (e) =>{
             navigate(`/home/${userId}`)
         }
         if(data.status == 'failure'){
-            
+            setErrors('could not login')
+        } else {
+            pushIntoErrors('could not work wanks')
         }
-    })
+    }) 
 }
 
 

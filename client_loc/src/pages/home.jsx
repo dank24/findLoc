@@ -17,12 +17,13 @@ import { direction } from "../utils/mapUtils";
 import { getUserdata } from "../utils/userUtils";
 import DropDownCard from "../components/dropDownLoc";
 import ProfileMenu from "../components/profileMenu";
+import ErrorMsg from "../components/errorMsg";
 
 import { userContext } from "../context/userContext";
 
 const Home = () => {
 
-  const {userData2} = useContext(userContext)
+  const {userData2, errors} = useContext(userContext)
     //  Variables
 
   const location = useLocation()
@@ -208,18 +209,19 @@ const Home = () => {
   }
 
   // Appends
-  const sideBarLocations = userData2.userHistory.map(its => {
-    return (
-      < LocationCard 
-        name = {its.name}
-        key = {its.name}
-        lenght = '25%'
-        lat =  {its.lat}
-        lng =  {its.lng}
-        handleClick = {handleSideBar}
+  const sideBarLocations = userData2.userHistory.length > 0 && 
+    userData2.userHistory.map(its => {
+      return (
+        < LocationCard 
+          name = {its.name}
+          key = {its.name}
+          lenght = '25%'
+          lat =  {its.lat}
+          lng =  {its.lng}
+          handleClick = {handleSideBar}
 
-      />
-    ) })
+        />
+      ) })
     
 
 
