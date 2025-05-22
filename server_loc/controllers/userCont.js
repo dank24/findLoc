@@ -76,16 +76,19 @@ exports.updUserInfo = asyncHandler(
     async(req, res, next) => {
         let userId = req.params.userId
         let rData = await req.body
+        let text;
 
         function handleFave(lis, datrm){
             let check = lis.some(it => it === datrm)
             if(check){
                 let i = lis.findIndex(it => it === datrm)
                 lis.splice(i, 1)
+                text = 'Removed Successfully'
 
                 return lis
             } else {
                 lis.push(datrm)
+                text = 'Added Successfully'
                 return lis
             }
         }
@@ -116,7 +119,7 @@ exports.updUserInfo = asyncHandler(
                 await usermodel.updateOne({_id: userId},
                 {$set: {savedLocations: useArr}}
                 )      
-                return res.status(200).json({message: 'favorites updated', status: 'success', data: user})
+                return res.status(200).json({message: 'favorites updated', status: 'success', data: user.savedLocations, txt: text})
             }
 
             if(rData.name == 'history' && user){

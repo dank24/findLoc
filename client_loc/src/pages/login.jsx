@@ -6,7 +6,7 @@ import { userContext } from "../context/userContext";
 
 const Login = () =>{
 
-    const {setErrors, push: pushIntoErrors} = useContext(userContext)
+    const {  pushIntoErrors} = useContext(userContext)
 
   //  Variables
   const [userData, setUserData] = useState({
@@ -41,12 +41,13 @@ const handleBtn = (e) =>{
         if(data.status == 'success'){
             let userId = data.data._id
             localStorage.setItem('id', userId)
+            pushIntoErrors('success')
             navigate(`/home/${userId}`)
         }
-        if(data.status == 'failure'){
-            setErrors('could not login')
+        else if(data.status == 'failure'){
+            pushIntoErrors('username or password incorrect')
         } else {
-            pushIntoErrors('could not work wanks')
+            pushIntoErrors('server error')
         }
     }) 
 }

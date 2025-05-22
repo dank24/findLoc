@@ -12,12 +12,14 @@ import { userContext } from '../context/userContext'
 const DropDownCard = (props) => {
 
 
-  const {userData2, reGetUData} = useContext(userContext)
+  const {userData2, reGetUData, pushIntoErrors} = useContext(userContext)
   //Variables
 
   let userData = props.data
   const [imgClicked, setImgClicked] = useState(false)
   let [favesArray, setFavesArray] = useState(userData2.savedLocations)
+
+  console.log(favesArray)
 
   const handleClick = (es,) =>{
 
@@ -26,54 +28,53 @@ const DropDownCard = (props) => {
     let starClickString = 'http://localhost:5173/src/assets/images/icons/starClick.svg'
     let starDefString = 'http://localhost:5173/src/assets/images/icons/starDef.svg'
 
-    console.log(es.target.src)
-
-    if(es.target.src == starDefString){
+    if(es.target.tagName == 'IMG'){
       let locText = siblingNode.innerHTML
-      es.target.src = starClick
 
       let obj = {
         name: 'faves',
         data: locText
       }
-      updUserInfo(props.id, obj)
-      
+
+      updUserInfo(props.id, obj).then(
+        resp => {
+          if(resp.status == 'success' && resp.txt == 'Removed Successfully'){
+            pushIntoErrors(resp.txt)
+            setFavesArray(prev => (resp.data))
+          }
+          if(resp.status == 'success' && resp.txt == 'Added Successfully'){
+            pushIntoErrors(resp.txt)
+            setFavesArray(prev => (resp.data))
+          }
+          
+        }
+      )
     }
-    else {
-      let locText = siblingNode.innerHTML
-      es.target.src = starDef
-
-      let obj = {
-        name: 'faves',
-        data: locText
-      }
-      updUserInfo(props.id, obj)
-    }
-
-
-
-    props.handleClick(es)
 
 
   }
 
   const handlePClick = async (e) => {
-    let locData = JSON.parse(e.target.id)
-    let name = e.target.innerHTML
-
-    let obj = {
-      name: 'history',
-      data: {
-        name,
-        ...locData
+    if(e.target.tagName == 'P'){
+      console.log(e.target.tagName)
+      let locData = JSON.parse(e.target.id)
+      let name = e.target.innerHTML
+  
+      let obj = {
+        name: 'history',
+        data: {
+          name,
+          ...locData
+        }
       }
+  
+     
+      updUserInfo(props.id, obj)
+     .then(r => reGetUData())
     }
 
-   
-   updUserInfo(props.id, obj)
-   .then(r => reGetUData())
-
   }
+
 
   // useEffect
 useEffect(() => {
@@ -91,7 +92,7 @@ useEffect(() => {
     }
   })
 
-}, [])
+}, [favesArray])
 
 
   let style = {

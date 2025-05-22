@@ -4,7 +4,6 @@ const ErrorMsg = (props) => {
 
 
 
-
   //
   return (
     <main id="err_main_cont" style={styles.main}>
@@ -19,20 +18,20 @@ export default ErrorMsg
 
 const styles = {
     main: {
-        width: '100%', display: 'flex', flexDirection: 'column' , gap: '1%',
-        height: '6vh', backgroundColor: 'black', color: 'white', justifyContent: 'center', alignItems: 'center'
+        width: '25vw', display: 'flex', flexDirection: 'column' , gap: '1%',
+        height: '6vh', backgroundColor: 'grey', color: 'white', justifyContent: 'center', alignItems: 'center'
     },
     x: {
         alignItems: 'center',
         marginTop: '-3%', marginLeft: '85%', color: 'red', display: 'flex', 
     },
-    p: { alignItems: 'center',
-        height: '40%', display: 'flex', alignItems: 'center'
+    p: { 
+        height: '40%', display: 'flex', alignItems: 'center', fontSize: '20px'
     },
     div: {
         height: '1%', 
         width: '90%', marginTop: '2%' ,
-        border: '1px solid red', 
+        border: '1px solid black', 
     }
 
 }

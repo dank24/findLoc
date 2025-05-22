@@ -27,6 +27,7 @@ export const login = async (dataS) => {
     .catch(error => {
         s = error
     })
+    console.log(s)
     return s
 }
 
