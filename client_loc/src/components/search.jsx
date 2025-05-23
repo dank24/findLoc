@@ -1,15 +1,20 @@
-import React, { useState } from "react";
-import {places} from '../assets/locs'
+import React, { useState, useContext, useRef, useEffect } from "react";
+import {places} from '../assets/locs2'
+import { userContext } from "../context/userContext";
+import { updUserInfo } from "../utils/userUtils";
 
 const Search = (props) =>{
   let [searchIts, setSearchIts] = useState([])
+  const inputRef = useRef(null)
 
   // Variables
+  const {reGetUData, userId } = useContext(userContext)
+
   const [searchValue, setSearchValue] = useState('')
 
   const searchFunc = (e) => {
 
-    let megaArr = [...places.lodges, ...places.PermSite, ...places.TempSite]
+    let megaArr = [...places.lodges, ...places.PermSite, ...places.TempSite, ...places.admin]
 
     let arr = []
     let {value} = e.target
@@ -19,20 +24,33 @@ const Search = (props) =>{
     let s1 = s.splice(0, 5)
 
     setSearchIts(s1)
+  }
 
-    console.log(s1)
-    console.log(s)
+  const handleSearch = (e) => {
+    
+      let obj = {
+      name: 'history',
+      data: {
+        ...e
+      }
+    } 
+    console.log(obj)
+
+    props.handleClick(e)
+    updUserInfo(userId, obj).then(
+      resp => reGetUData()
+    )
   }
 
   // STyles
   const style = {
     position: 'absolute', zIndex: '1', height: 'fit-content',
-    width:'35%', right: '4px', display: 'flex', flexDirection: 'column',
+    display: 'flex', flexDirection: 'column',
     alignItems: 'center', 
 
     input: {
         height: '6vh', width: '100%', borderRaduis: '8%',
-        border: '1px solid black', fontSize: '20px',
+        border: '1px solid black', fontSize: '25px',
         textAlign: 'center', borderRadius: '10px', 
         backgroundColor: 'white',marginTop: '3px'
     },
@@ -57,17 +75,20 @@ const Search = (props) =>{
 
   //  Appends
   let append = searchIts.map(its => {
-    return <div onClick={e => props.handleClick(its)} className="searchP" style={style.here}>
+    return <div onClick={e => handleSearch(its)} className="searchP" style={style.here}>
         <p style={style.hereP}>{its.name}</p>
     </div>
   })
 
+  useEffect(() => {
+    inputRef.current.focus()
+  })
   // UI
   return (
     
     <main style={style} id="search_main_cont">
 
-        <input onChange={
+        <input ref={inputRef} onChange={
             e => searchFunc(e)
         } style={style.input} placeholder="input location"/>
 

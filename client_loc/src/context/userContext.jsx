@@ -100,13 +100,9 @@ errors.length > 0 ? console.log('d') : console.log
   //
 
 
-  const styles ={ zIndex: '1',
-    height: 'fit-content', display: errors.length > 0 ? 'flex': 'none', flexDirection: 'column', width: '25vw',
-    gap: '10px', border: '2px solid brown', position: 'absolute', left: '1px'
-  }
   return (
-    <>
-      <section  style={styles}>
+    <main id="main_context">
+      <section id={errors.length > 0 ? 'alert_visible' : 'alert_hidden'}>
       {
         errors.length > 0 && errors.map(it => {
           return < ErrorMsg 
@@ -118,11 +114,11 @@ errors.length > 0 ? console.log('d') : console.log
       </section>
 
       
-      <userContext.Provider value={{userData2, reGetUData, setErrors, clearErr, pushIntoErrors, errors}}>
+      <userContext.Provider value={{userData2, reGetUData, setErrors, clearErr, pushIntoErrors, errors, userId}}>
           {children}
       </userContext.Provider>
 
-    </>
+    </main>
     
   )
 }

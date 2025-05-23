@@ -13,6 +13,7 @@ const Login = () =>{
     userName: '',
     userPass: '',
   })
+  const [dsbBtn, setDsbtn] = useState(false)
 let navigate = useNavigate()
 
 
@@ -34,6 +35,7 @@ const handleBtn = (e) =>{
     e.preventDefault()
     
     console.log(userData)
+    setDsbtn( prev => (true))
 
 
     let l = login(userData)
@@ -42,12 +44,17 @@ const handleBtn = (e) =>{
             let userId = data.data._id
             localStorage.setItem('id', userId)
             pushIntoErrors('success')
-            navigate(`/home/${userId}`)
+            navigate(`/home/${userId}`).then(
+                resp => setDsbtn(prev => (false))
+            )
+            
         }
         else if(data.status == 'failure'){
             pushIntoErrors('username or password incorrect')
+            setDsbtn(prev => (true))
         } else {
             pushIntoErrors('server error')
+            setDsbtn(prev => (false))
         }
     }) 
 }
@@ -55,39 +62,41 @@ const handleBtn = (e) =>{
 
   // UI
   return(
+    <div id="this">
     <main id="signup_main_cont">
 
-        <section id="signup_first_sec">
+<section id="signup_first_sec">
 
-            <form>
-                <h2>Login</h2>
+    <form>
+        <h2>Login</h2>
 
-                <div>
-                    <input id="userName" placeholder="Enter Username" value={userData.userName} 
-                        onChange={e => handleInput(e)}
-                        />
-                </div>
-                
-                <div>
-                    <input id="userPass" placeholder="Enter Password" value={userData.userPass} 
-                        onChange={e => handleInput(e)}
-                        />
-                </div>
-
-                <button onClick={e => handleBtn(e)}>
-                Login
-                </button>
-
-                <p>Don't have an account ? <Link to='/signup'>signup</Link></p>
-            </form>
-
-        </section>
-
-        <section id="login_second_sec">
+        <div>
+            <input id="userName" placeholder="Enter Username" value={userData.userName} 
+                onChange={e => handleInput(e)}
+                />
+        </div>
         
-        </section>
+        <div>
+            <input id="userPass" placeholder="Enter Password" value={userData.userPass} 
+                onChange={e => handleInput(e)}
+                />
+        </div>
 
-    </main>
+        <button disabled={dsbBtn} onClick={e => handleBtn(e)}>
+        Login
+        </button>
+
+    </form>
+
+</section>
+
+<section id="login_second_sec">
+
+</section>
+
+</main>
+    </div>
+
   )
 }
 

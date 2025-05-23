@@ -1,10 +1,11 @@
 import react, { use } from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate, useRouteLoaderData } from "react-router-dom";
 
 import '../assets/stylesheets/main.css'
 
 import {createUserApi, saveToLocal} from '../utils/userUtils.js'
+import { userContext } from "../context/userContext.jsx";
 import bcrypt from 'bcryptjs'
 
 const Signup = () =>{
@@ -12,6 +13,7 @@ const Signup = () =>{
   // Variables
 
   const navigate = useNavigate()
+  const {pushIntoErrors} = use(userContext)
 
   const [errMsgs, setErrMsgs] = useState({
     userName: ['Username too short', 'username not available', ],
@@ -31,6 +33,7 @@ const Signup = () =>{
     salt: '',
     hashedPass: ''
   })
+  const [dsbBtn, setDsbBtn] = useState(true)
 
   const [signUpData, setSignUpData] = useState({
         userName: '',
@@ -71,12 +74,16 @@ const Signup = () =>{
       if(checkValid.validConPass){
         createUserApi(dataS)
         .then(resp => {
-          resp.status == 'success' ? 
-          navigate('/login') : 
-          console.log('failed')
+          if(resp.status == 'success'){
+            pushIntoErrors('Account Created')
+            navigate('/login') 
+          } else {
+            pushIntoErrors('username not available')
+          }  
         }) 
       } else {
         console.log('error')
+        pushIntoErrors('Server Error')
       }
 
     }
@@ -108,6 +115,8 @@ const Signup = () =>{
         setCheckValid(prev => (
           {...prev, validConPass: false}
         ))
+        setDsbBtn(prev => (false))
+
       } else if(pass === conpass){
         setCheckValid(prev => (
           {...prev, validConPass: true}
@@ -128,56 +137,59 @@ const Signup = () =>{
 
   // UI
   return( 
+    <div id="this">
     <main id="signup_main_cont">
 
-        <section id="signup_first_sec">
+    <section id="signup_first_sec">
 
-          <form>
-            <h2>Signup</h2>
-            <div>
-              <input id="userName" placeholder="Enter Username" value={signUpData.userName} 
-                  onChange={e => handleInput(e)}
-                />
-            </div>
-            
-            <div>
-              <input id="userMail" placeholder="Enter Mail" value={signUpData.userMail} 
-                  onChange={e => handleInput(e)}
-                />
-            </div>
-            {
-             checkValid.validEmail && <p>{errMsgs.userEmail[0]}</p>
-            }
-
-
-            <div>
-              <input type="password" id="userPass" placeholder="Enter Password" value={encPass.basePass} 
-                  onChange={e => handleInput(e)}
-                />
-            </div>
-
-            <div>
-              <input type="password" id="conPass" placeholder="Confirm Password" value={signUpData.conPass} 
-                  onChange={e => handleInput(e)}
-                />
-            </div>
-            {
-              !checkValid.validConPass && <p>{errMsgs.userconPass}</p>
-            }
-
-            <button disabled={!checkValid.validConPass} onClick={e => handleBtn(e)}>
-              Signup
-            </button>
-
-          </form>
-
-        </section>
-
-        <section id="login_second_sec">
+      <form>
+        <h2>Signup</h2>
+        <div>
+          <input id="userName" placeholder="Enter Username" value={signUpData.userName} 
+              onChange={e => handleInput(e)}
+            />
+        </div>
         
-        </section>
+        <div>
+          <input id="userMail" placeholder="Enter Mail" value={signUpData.userMail} 
+              onChange={e => handleInput(e)}
+            />
+        </div>
+        {
+        checkValid.validEmail && <p>{errMsgs.userEmail[0]}</p>
+        }
+
+
+        <div>
+          <input type="password" id="userPass" placeholder="Enter Password" value={encPass.basePass} 
+              onChange={e => handleInput(e)}
+            />
+        </div>
+
+        <div>
+          <input type="password" id="conPass" placeholder="Confirm Password" value={signUpData.conPass} 
+              onChange={e => handleInput(e)}
+            />
+        </div>
+        {
+          !checkValid.validConPass && <p>{errMsgs.userconPass}</p>
+        }
+
+        <button disabled={!checkValid.validConPass || dsbBtn} onClick={e => handleBtn(e)}>
+          Signup
+        </button>
+
+      </form>
+
+    </section>
+
+    <section id="login_second_sec">
+
+    </section>
 
     </main>
+    </div>
+
   )
 
 }

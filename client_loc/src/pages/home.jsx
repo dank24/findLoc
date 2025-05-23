@@ -308,10 +308,12 @@ const Home = () => {
 
           </section>
 
+          <img width='37px' onClick={onClickEvents.target} src={targetIcon} id="target_icon"/> 
+
+
           <section id="home_second_sec">
       
               <div id="map_div">
-                <img onClick={onClickEvents.target} src={targetIcon} id="target_icon"/> 
                 < MapComp 
                     dir = {dirToLocation.dir ? 'true': 'false'}
                     lat = {locationData.lat}

@@ -97,12 +97,8 @@ useEffect(() => {
 
   let style = {
     position: 'absolute',
-    width: '85%',
     height: '60%',
-    
     zIndex: '1',
-    top: '10%',
-    left: '8%',
     border: '1px solid white',
     borderRadius: '4%',
     display: 'flex', 
@@ -161,7 +157,7 @@ useEffect(() => {
   // Appends
   let permSite = places.PermSite.map(its =>{
     return(
-      <div style={style3.div}>
+      <div key={its.name} style={style3.div}>
         <p onClick={e => {props.handleClick(e); handlePClick(e)}} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
         <img id={`{"lat": "${its.lat}", "lng": "${its.lng}"}`} onClick={e =>handleClick(e, its.name)} className='imgs' height='100%' width='13%' />
       </div>
@@ -169,7 +165,7 @@ useEffect(() => {
   })
   let termSite = places.TempSite.map(its =>{
     return(
-      <div style={style3.div}>
+      <div key={its.name} style={style3.div}>
         <p onClick={e => {props.handleClick(e); handlePClick(e)}} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
         <img id={`{"lat": "${its.lat}", "lng": "${its.lng}"}`} onClick={e =>handleClick(e, its.name)} className='imgs' height='90%' width='10%' />
       </div>
@@ -177,7 +173,7 @@ useEffect(() => {
   })
   let lodges = places.lodges.map(its =>{
     return(
-      <div style={style3.div}>
+      <div  key={its.name} style={style3.div}>
         <p onClick={e => {props.handleClick(e); handlePClick(e)}} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
         <img id={`{"lat": "${its.lat}", "lng": "${its.lng}"}`} onClick={e =>handleClick(e, its.name)} className='imgs' height='90%' width='10%' />
       </div>
@@ -185,7 +181,7 @@ useEffect(() => {
   })
   let admin = places.admin.map(its =>{
     return(
-      <div style={style3.div}>
+      <div key={its.name} style={style3.div}>
         <p onClick={e => {props.handleClick(e); handlePClick(e)}} id={`{"lat":"${its.lat}","lng":"${its.lng}","name":"${its.name}"}`} className='dropdown_p' style={styles2.p} key={its.lat}>{its.name}</p>
         <img id={`{"lat": "${its.lat}", "lng": "${its.lng}"}`} onClick={e =>handleClick(e, its.name)} className='imgs' height='90%' width='10%' />
       </div>

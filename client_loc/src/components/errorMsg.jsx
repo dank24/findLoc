@@ -18,19 +18,19 @@ export default ErrorMsg
 
 const styles = {
     main: {
-        width: '25vw', display: 'flex', flexDirection: 'column' , gap: '1%',
-        height: '6vh', backgroundColor: 'grey', color: 'white', justifyContent: 'center', alignItems: 'center'
+        width: '100%', display: 'flex', flexDirection: 'column' , gap: '1%', borderRadius: '0.3rem',
+        height: '6vh', backgroundColor: 'rgb(201, 51, 31)', color: 'white', justifyContent: 'center', alignItems: 'center'
     },
     x: {
         alignItems: 'center',
-        marginTop: '-3%', marginLeft: '85%', color: 'red', display: 'flex', 
+        marginTop: '-3%', marginLeft: '85%', color: 'black', display: 'flex', 
     },
     p: { 
-        height: '40%', display: 'flex', alignItems: 'center', fontSize: '20px'
+        height: '20%', display: 'flex', alignItems: 'center', 
     },
     div: {
         height: '1%', 
-        width: '90%', marginTop: '2%' ,
+        width: '90%', marginTop: '6%' ,
         border: '1px solid black', 
     }
 

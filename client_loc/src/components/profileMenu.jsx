@@ -9,7 +9,7 @@ const ProfileMenu = (props) =>{
     Account: false,
     About: false,
   })
-  let pArr = ['Account', 'About', 'Saved', 'Logout',]
+  let pArr = ['Account', 'About', 'Logout',]
 
 
   // Functions
@@ -30,8 +30,8 @@ const ProfileMenu = (props) =>{
   // Styling
   let style = {
     main: {
-        height: '23%', border: '1px solid black', position: 'absolute', gap: '1%', justifyContent: 'center',
-        width: '21%', zIndex: '1', right: '1%', borderRadius: '5%', marginTop: '3px',
+        height: '20%', border: '1px solid black', position: 'absolute', gap: '1%', justifyContent: 'center',
+        zIndex: '1', borderRadius: '5%', marginTop: '3px',
          display: 'flex', alignItems: 'center', flexDirection: 'column'
     },
     h1: {
@@ -40,7 +40,7 @@ const ProfileMenu = (props) =>{
     },
     accountDiv: {
         zIndex: '1', height: '42%', position: 'absolute', border: '1px solid black',
-        width: '42%', left: '57%', top: '6.5%', borderRadius: '5%', 
+        top: '6.5%', borderRadius: '5%', 
         backgroundColor: 'grey', color: 'white', display: 'flex', justifyContent: 'center',
         alignItems: 'center', flexDirection: 'column', gap: '5%',
         div: {
@@ -65,14 +65,14 @@ const ProfileMenu = (props) =>{
   return (
     <>
     { uiDisplay.profile &&
-        <main className="cards" style={style.main}>
+        <main id="user_main" className="cards" style={style.main}>
             {appendMain}
         </main>
     }
   
 
     {  uiDisplay.Account &&
-        <div style={style.accountDiv}>
+        <div id="acc_main" style={style.accountDiv}>
           <div style={style.accountDiv.div}>
             <h3>Username:</h3>
             <h4>{props.userName}</h4>
@@ -91,7 +91,7 @@ const ProfileMenu = (props) =>{
     }
 
     {  uiDisplay.About &&
-       <div className="container">
+       <div id="about_main" className="container">
           <h1>About University Navigator</h1>
           <p>University Navigator is a dedicated platform designed to simplify and enhance the campus experience for students, faculty, and visitors. We understand that navigating a large university can be challenging, especially for newcomers. Our mission is to provide an intuitive and efficient tool that makes it easy to find locations, services, and resources within the university.</p>
 

@@ -174,14 +174,11 @@
   width: 100%;
   border-radius: 2%;
 }
-#home_main_cont #home_second_sec #map_div #target_icon {
+#target_icon {
   position: absolute;
   z-index: 1;
-  bottom: 16%;
-  right: 1%;
-  background-color: rgb(13, 38, 71);
-  height: 40px;
-  width: 40px;
+  bottom: 10%;
+  right: 1.4%;
   cursor: pointer;
 }
 #home_main_cont #home_second_sec #phoneUICont {
@@ -323,7 +320,104 @@
   overflow: scroll;
 }
 
+#alert_hidden {
+  display: none;
+}
+#alert_visible{
+      height: fit-content; 
+      display: flex; 
+      flex-Direction: column; 
+      width: 25vw;
+      gap: 10px; 
+      position: absolute; 
+      right: 10px; 
+      bottom: 10px;
+      z-index: 5;
+}
+#dropdown_card_main{
+  width: 85%;
+  top: 10%;
+  left: 8%;
+}
+#search_main_cont{
+  width: 30%;
+  right: 4px;
+}
+#user_main{
+  width: 21%;
+  right: 1%;
+}
+#acc_main{
+  width: 42%; 
+  left: 57%;
+}
+#about_main{
+  width: 60%; 
+  height: 70%;
+  left: 10%;
+}
+
 @media (min-width: 1050px){
+  #acc_main{
+    width: 30%; 
+    height: 62%;
+  }
+  
+  #user_main{
+    width: 13%;
+    top: 5.4%;
+    right: 20.5%;
+
+  }
+  #search_main_cont{
+    width: 20%;
+    right: 20.5%;
+    top: 5.4%;
+  }
+  
+  #dropdown_card_main{
+    width: 55%;
+    top: 10%;
+    left: 23%;
+  }
+  #main_context{
+    height: 100vh;
+    width: 100vw;
+    background-color: red;
+  }
+  #alert_visible{
+    height: fit-content; 
+    display: flex; 
+    flex-Direction: column; 
+    width: 14vw;
+    gap: 10px; 
+    position: absolute; 
+    right: 2%; 
+    top: 10px;
+    z-index: 2;
+}
+#alert_visible p {
+  font-size: 15Spx;
+  text-align: center;
+}
+  #this{
+    background-color: rgb(24, 19, 19);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #signup_main_cont {
+    display: flex;
+    height: 100vh;
+    width: 60vw;
+    align-items: 0;
+    justify-content: 0;
+    background-image: url("../images/bgi/bgi1.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
   #mainCont {
     background-color: rgb(24, 19, 19);
     height: 100vh;
@@ -344,10 +438,12 @@
   }
 
   #target_icon{
-    position: static;
-    position: fixed;
-    left: 76vw;
-    top: 85vh;
+    position: absolute;
+    right: 21%;
+    top: 84.5vh;
+    z-index: 1;
+    cursor: pointer;
+
   }
 
   #home_main_cont {
@@ -364,6 +460,15 @@
 
 
 @media (max-width: 500px) {
+  #signup_main_cont {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: row;
+    align-items: 0;
+    justify-content: 0;
+  }
+
   #mainCont {
     display: flex;
     height: 100dvh;
