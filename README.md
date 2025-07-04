@@ -1,2 +1,2 @@
 # findLoc
-A location finder for specific locations
+A location finder for AE-FUAI campus 
